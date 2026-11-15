@@ -1,0 +1,64 @@
+{
+ "lane": "rodin3",
+ "tool": "Hyper3D Rodin Gen-2.5 API",
+ "balance_log": [
+  {
+   "time": "2026-11-14T10:26:10+08:00",
+   "note": "",
+   "balance": 408
+  },
+  {
+   "time": "2026-11-14T10:30:43+08:00",
+   "note": "",
+   "balance": 407
+  }
+ ],
+ "rows": [
+  {
+   "label": "knife_1",
+   "time": "2026-11-14T10:28:50+08:00",
+   "done_time": "2026-11-14T10:29:29+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": false,
+   "note": "rejected: came out a plain bar, slider faces down, grip less readable",
+   "uuid": "29c2976d-f374-4e3f-b5b9-ffe441427ab7",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "knife_3",
+   "time": "2026-11-14T10:28:52+08:00",
+   "done_time": "2026-11-14T10:29:29+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": true,
+   "note": "kept: slider on top, ribbed grip and blade read at 3k tris",
+   "uuid": "a604f4c8-0b39-4306-bacf-231f058019c9",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  }
+ ]
+}

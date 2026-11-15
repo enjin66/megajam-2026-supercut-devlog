@@ -1,0 +1,156 @@
+{
+ "lane": "rodin1",
+ "tool": "Hyper3D Rodin Gen-2.5 API",
+ "balance_log": [
+  {
+   "time": "2026-11-14T09:19:25+08:00",
+   "note": "before test",
+   "balance": 421
+  },
+  {
+   "time": "2026-11-14T09:25:18+08:00",
+   "note": "after 6 generations",
+   "balance": 418
+  }
+ ],
+ "rows": [
+  {
+   "label": "lamp_FLUX",
+   "time": "2026-11-14T09:20:06+08:00",
+   "done_time": "2026-11-14T09:21:50+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-High"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": true,
+   "note": "used in the compare page; cleaned to out/",
+   "uuid": "4782c725-0024-4467-a0cc-2edc72daa944",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "knife_FLUX",
+   "time": "2026-11-14T09:20:09+08:00",
+   "done_time": null,
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": true,
+   "note": "used in the compare page; cleaned to out/",
+   "uuid": "8140c807-6fe1-44a9-b05e-d5c2a26d9137",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "chair_FLUX",
+   "time": "2026-11-14T09:20:10+08:00",
+   "done_time": null,
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": true,
+   "note": "used in the compare page; cleaned to out/",
+   "uuid": "295ba387-f568-48ab-8edc-f20605f89895",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "lamp_CODEX",
+   "time": "2026-11-14T09:23:08+08:00",
+   "done_time": "2026-11-14T09:25:11+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-High"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": true,
+   "note": "used in the compare page; cleaned to out/",
+   "uuid": "708c6a8d-2b28-41b2-9630-c76f5ad51a5e",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "knife_CODEX",
+   "time": "2026-11-14T09:23:11+08:00",
+   "done_time": "2026-11-14T09:25:11+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": true,
+   "note": "used in the compare page; cleaned to out/",
+   "uuid": "1c57667a-43eb-48a7-b303-08aa76fdce53",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "chair_CODEX",
+   "time": "2026-11-14T09:23:12+08:00",
+   "done_time": "2026-11-14T09:25:11+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": true,
+   "note": "used in the compare page; cleaned to out/",
+   "uuid": "3b7f29fe-c0cb-48df-8b8e-dfefc79d8a77",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,478 @@
+{
+ "lane": "rodin2",
+ "tool": "Hyper3D Rodin Gen-2.5 API",
+ "balance_log": [
+  {
+   "time": "2026-11-14T09:50:29+08:00",
+   "note": "",
+   "balance": 418
+  },
+  {
+   "time": "2026-11-14T10:03:18+08:00",
+   "note": "",
+   "balance": 408
+  }
+ ],
+ "rows": [
+  {
+   "label": "ruler_1",
+   "time": "2026-11-14T09:59:14+08:00",
+   "done_time": "2026-11-14T10:00:46+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": true,
+   "note": "kept; exported to out/",
+   "uuid": "091db8db-bc6d-4e3e-a778-6b2d8f4eb447",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "ruler_3",
+   "time": "2026-11-14T09:59:15+08:00",
+   "done_time": "2026-11-14T10:00:55+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": false,
+   "note": "more scratch speckle on the face",
+   "uuid": "40cacf9e-19fb-4f32-85aa-432adb9116d9",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "pencil_1",
+   "time": "2026-11-14T09:59:15+08:00",
+   "done_time": "2026-11-14T10:01:02+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": true,
+   "note": "kept; exported to out/",
+   "uuid": "80b9eec8-6812-47ff-9b3e-46d2d35474dd",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "pencil_3",
+   "time": "2026-11-14T09:59:16+08:00",
+   "done_time": "2026-11-14T10:01:10+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": false,
+   "note": "streaky wear lines along the body",
+   "uuid": "34cb4764-be16-411b-b84a-531aa664c131",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "glue_2",
+   "time": "2026-11-14T09:59:18+08:00",
+   "done_time": "2026-11-14T10:01:17+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": false,
+   "note": "dark speck on the back; nozzle tip smeared",
+   "uuid": "93b63ccd-b85a-44ff-b3ce-c772cf03683b",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "glue_1",
+   "time": "2026-11-14T09:59:19+08:00",
+   "done_time": "2026-11-14T10:01:25+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": true,
+   "note": "kept; exported to out/",
+   "uuid": "528e4e4a-0498-4baa-958e-f1181c27d1a2",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "tape_2",
+   "time": "2026-11-14T09:59:20+08:00",
+   "done_time": "2026-11-14T10:01:31+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": true,
+   "note": "kept; exported to out/",
+   "uuid": "cee50d6c-4769-4bbe-8ed8-af50f8d9e614",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "tape_1",
+   "time": "2026-11-14T09:59:21+08:00",
+   "done_time": "2026-11-14T10:01:39+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": false,
+   "note": "more yellow than tape_2",
+   "uuid": "c99ddab7-8057-4299-870b-ea71b0fc43f6",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "setsquare_2",
+   "time": "2026-11-14T09:59:22+08:00",
+   "done_time": "2026-11-14T10:01:46+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": true,
+   "note": "kept; exported to out/",
+   "uuid": "049ed949-243e-4831-b9b8-19d6dd149e39",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "setsquare_3",
+   "time": "2026-11-14T09:59:23+08:00",
+   "done_time": "2026-11-14T10:01:53+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": false,
+   "note": "thicker slab (23 cm vs 18 cm at player scale)",
+   "uuid": "599980d1-54fb-4cf4-8d65-b9f3427d8491",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "light_1",
+   "time": "2026-11-14T09:59:24+08:00",
+   "done_time": "2026-11-14T10:01:59+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": false,
+   "note": "barn doors crumpled, head reads messy",
+   "uuid": "4618be83-65d0-4ef3-83f2-15ac980c367b",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "light_3",
+   "time": "2026-11-14T09:59:25+08:00",
+   "done_time": "2026-11-14T10:02:06+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": true,
+   "note": "kept; exported to out/",
+   "uuid": "dded2f46-5020-44f2-bc3a-743aea361217",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "camera_1",
+   "time": "2026-11-14T09:59:26+08:00",
+   "done_time": "2026-11-14T10:02:13+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": false,
+   "note": "fine; camera_2 has more detail (viewfinder, crank)",
+   "uuid": "aa1ee2b3-a182-4db0-b955-d6a3baa3b821",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "camera_2",
+   "time": "2026-11-14T09:59:28+08:00",
+   "done_time": "2026-11-14T10:02:19+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": true,
+   "note": "kept; exported to out/",
+   "uuid": "c6cfa180-25de-4bbb-80d7-5643355f36fe",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "apple_1",
+   "time": "2026-11-14T09:59:29+08:00",
+   "done_time": "2026-11-14T10:02:27+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": false,
+   "note": "boxes lean, top box sags",
+   "uuid": "88aad6e3-1b09-4ae5-a4ce-e64fd6c12097",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "apple_3",
+   "time": "2026-11-14T09:59:30+08:00",
+   "done_time": "2026-11-14T10:02:34+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": true,
+   "note": "kept; exported to out/",
+   "uuid": "1730b47d-9c58-4e5a-a02e-d4ca0e929ec3",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "sandbag_1",
+   "time": "2026-11-14T09:59:31+08:00",
+   "done_time": "2026-11-14T10:02:40+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": true,
+   "note": "kept; exported to out/",
+   "uuid": "88ae1096-7f74-4772-857e-878774afc2c8",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "sandbag_2",
+   "time": "2026-11-14T09:59:32+08:00",
+   "done_time": "2026-11-14T10:02:47+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": false,
+   "note": "bags read as blobs, saddle shape lost",
+   "uuid": "20448888-03f2-419a-9b56-6eef6dfc2dd1",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "reel_1",
+   "time": "2026-11-14T09:59:33+08:00",
+   "done_time": "2026-11-14T10:02:54+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": false,
+   "note": "flange discs faceted, stand hidden behind the drum",
+   "uuid": "b46e4e96-2747-4d70-ab51-51127d438c20",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  },
+  {
+   "label": "reel_3",
+   "time": "2026-11-14T09:59:34+08:00",
+   "done_time": "2026-11-14T10:03:01+08:00",
+   "prompt": "",
+   "settings": {
+    "geometry_file_format": "glb",
+    "mesh_mode": "Raw",
+    "quality_override": "20000",
+    "tier": "Gen-2.5-Medium"
+   },
+   "est_cost": 0.5,
+   "consumed": 0.5,
+   "state": "downloaded",
+   "kept": true,
+   "note": "kept; exported to out/",
+   "uuid": "61319fb8-198c-4f84-9c96-304aa15d9df6",
+   "job_status": [
+    "Done",
+    "Done",
+    "Done"
+   ]
+  }
+ ]
+}
