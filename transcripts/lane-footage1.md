@@ -11723,6 +11723,100 @@ EOF
 bash tools/frames.sh e2 2>&1 | tail -1; python -I tools/cut_seq.py e2 E --spans spans_e.json 2>&1 | grep -E "E0|wav|s  |wrote|rror"; python -I tools/events.py e2 E 2>&1 | tail -1; python -I tools/turns.py D:/UE/Builds/footage1/clips/C_e_closekill_gen7.mp4; python -I tools/check_clips.py E 2>&1 | tail -1
 ```
 
+Result:
+
+```
+2815 raw frames
+E0 per clap (engine frame of captured frame 0): [2, 2, 2, 2, 2]  median 2
+wav 2873.60 engine frames, log 2874; level jump on each snap frame, dB: [3.1, 3.3, 10.7, 6.2, 7.9]
+  C_e_closekill_gen7          3.60 s  gen_s7 d04, first chamber, live (no freeze): one rusher runs down the lane at the player, lunges and hits, rests at arm's length, one shot, it bursts and drops; the camera eases down with it
+wrote C_e_closekill_gen7.mp4
+C_e_closekill_gen7       kills 1
+C_e_closekill_gen7               max  1.86 deg/frame at   1.65 s   skipped 8/216 frames
+```
+
+### Mon 16 Nov 07:17:31 · Agent (claude-opus-5-5)
+
+Max turn 1.86 deg/frame and E0 agrees on all five claps. check_clips printed nothing, so I'll rerun it and look at the frames:
+
+**Mon 16 Nov 07:17:33 · Tool call: Bash** (Run clip checks and build a frame strip of the close kill)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/footage1"; python -I tools/check_clips.py C_e 2>&1 | tail -3; python -I -c "
+import json;print(json.load(open('D:/UE/Builds/footage1/clips/clips.json'))['C_e_closekill_gen7']['events'])"; ffmpeg -v error -y -i D:/UE/Builds/footage1/clips/C_e_closekill_gen7.mp4 -vf "select='eq(n,5)+eq(n,60)+eq(n,95)+eq(n,125)+eq(n,133)+eq(n,138)+eq(n,150)+eq(n,175)+eq(n,214)',scale=480:-1,tile=3x3" -vsync 0 -frames:v 1 shots/c_e_strip.jpg; echo ok
+```
+
+Result:
+
+```
+C_e_closekill_gen7         OK     3.60 s   216 fr  keygap 30  black []  still>0.6s []
+{'kills': [{'t': 2.2, 'who': 'rusher 0'}]}
+Unrecognized option 'vsync'.
+Error splitting the argument list: Option not found
+ok
+```
+
+**Mon 16 Nov 07:17:38 · Tool call: Bash** (Build the frame strip of the close kill)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/footage1"; ffmpeg -v error -y -i D:/UE/Builds/footage1/clips/C_e_closekill_gen7.mp4 -vf "select='eq(n\,5)+eq(n\,60)+eq(n\,95)+eq(n\,125)+eq(n\,133)+eq(n\,138)+eq(n\,150)+eq(n\,175)+eq(n\,214)',scale=480:-1,tile=3x3" -fps_mode passthrough -frames:v 1 shots/c_e_strip.jpg && echo ok
+```
+
+Result:
+
+```
+ok
+```
+
+**Mon 16 Nov 07:17:40 · Tool call: Read**
+
+```
+{
+ "file_path": "[notes]\\unreal\\megajam-2026\\lanes\\footage1\\shots\\c_e_strip.jpg"
+}
+```
+
+Result:
+
+```
+[image]
+```
+
+**Mon 16 Nov 07:17:51 · Tool call: Bash** (Add close-kill notes, rebuild INDEX, log it)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/footage1"; python - <<'EOF'
+import json
+n=json.load(open("notes.json"))
+n["C_e_closekill_gen7"]={"order":6,"tag":"BEST (e)","best":2.2,"best_why":"the shot at arm's length, the rusher bursts","checked":True,
+ "what":"gen_s7 d04 first chamber (take e2), live, one enemy in frame: a rusher runs down the lane, lunges at 1.40 and hits at 1.60 (health 85), rests at arm's length, shot at 2.20, bursts into wooden blocks, staggers and falls flat by 3.4. The camera eases down with it (tracking path from take e1's per-frame aim log). The other rusher stays hidden behind a flat."}
+json.dump(n,open("notes.json","w"),indent=1)
+EOF
+python -I tools/index.py; grep -c "C_e_closekill" D:/UE/Builds/footage1/clips/INDEX.md; echo "- $(date "+%d %b %H:%M") C_e_closekill_gen7 (trailer thread ask): d04 first chamber live, one rusher. e1 logged both rushers every frame with aim lines (rusher 1 never moves); e2 follows rusher 0 with smoothed look lines ending on its chest on the kill frame (0.6 s into its rest after the first lunge). Replay matched e1 to the frame. 3.60 s, max 1.86 deg/frame, kill at 2.20, E0 +2 on 5 claps, start/middle/end checked by eye." >> LOG.md
+```
+
+Result:
+
+```
+46 rows
+1
+```
+
+### Mon 16 Nov 07:17:55 · Agent (claude-opus-5-5)
+
+C_e_closekill_gen7 is in `D:\UE\Builds\footage1\clips\`: 3.60 s, max turn 1.86 deg/frame.
+
+It's a live take, no freeze, in gen_s7 room d04's first chamber, and only one rusher is ever in frame:
+- 1.40 s: the rusher runs down the lane and lunges.
+- 1.60 s: the lunge hits (health 85), then it rests at arm's length.
+- 2.20 s: one shot. It bursts into wooden blocks, staggers and falls flat by 3.4 s.
+
+The camera follows it down smoothly. I checked the start, middle and end frames by eye. Format checks pass.
+
+The clip has rows in clips.json and INDEX.md with its event times.
+
+Skills used: none
+
 ## Helper side-session agent-ad6c20f7b89cb2937
 
 ### Mon 16 Nov 06:03:23 · Brief from the orchestrating agent

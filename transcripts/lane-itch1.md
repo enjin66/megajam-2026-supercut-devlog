@@ -18194,3 +18194,4129 @@ The agent and token counts are Claude sessions only; Codex sessions aren't inclu
 The main thread also sent run facts: 41 pre-made runs, and a new run after a death, a restart or a quit. The page needs no change for these. "Shifting sets" still holds, I didn't add a run count since you haven't asked for one, and the page never says the levels are generated while you play.
 
 [LOG.md](<[notes]/unreal/megajam-2026/lanes/itch1/LOG.md>) and [HANDOFF.md](<[notes]/unreal/megajam-2026/lanes/itch1/HANDOFF.md>) are updated. Still waiting on the trailer and the dev log link.
+
+### Mon 16 Nov 07:37:51 · Brief from the orchestrating agent
+
+make  the thumbnail 16:9 for youtube
+
+**Mon 16 Nov 07:37:57 · Tool call: Skill**
+
+```
+{
+ "skill": "studio-tools"
+}
+```
+
+Result:
+
+```
+Launching skill: studio-tools
+```
+
+**Mon 16 Nov 07:37:57 · Tool call: Bash** (Size up the cover script and its log history)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/itch1" && wc -l tools/make_cover.py && ls cover/ && grep -n -i 'cover' LOG.md | tail -8 | cut -c1-400
+```
+
+Result:
+
+```
+153 tools/make_cover.py
+cover_v1_315x250_check.png
+cover_v1_630x500.png
+cover_v1_nologo_1071x850.png
+cover_v2_315x250_check.png
+cover_v2_630x500.png
+cover_v2_nologo_1071x850.png
+cover_v3_630x500.png
+cover_v3_nologo_1071x850.png
+cover_v4_315x250_check.png
+cover_v4_630x500.png
+cover_v5_315x250_check.png
+cover_v5_630x500.png
+cover_v6_ink_315x250_check.png
+cover_v6_ink_630x500.png
+cover_v6_none_315x250_check.png
+cover_v6_none_630x500.png
+cover_v6_paper_315x250_check.png
+cover_v6_paper_630x500.png
+cover_v6_white_315x250_check.png
+cover_v6_white_630x500.png
+cover_v6_yellow_315x250_check.png
+cover_v6_yellow_630x500.png
+cover_v7_white_315x250_check.png
+cover_v7_white_630x500.png
+cover_v8_white_315x250_check.png
+cover_v8_white_630x500.png
+238:**03:46.** Cover v7: revolver drop eased to 40 px full frame (about 24 on the cover; owner: slightly higher). The T stays clear.
+239:**03:47.** Cover v7: revolver drop 48 px full frame (about 28 on the cover; owner: very slightly lower).
+240:**03:47.** Owner: cover final ('perfect'). Upload file: cover/cover_v7_white_630x500.png (white stroke, black glow, revolver drop 48 px).
+241:**03:52.** Owner answers: 1 ok; 2 dev log link, owner vets the repo first; 3 no 'puzzle' (the puzzles are too tame), roguelite check cleared; 4 recount later; 5 GPT Images 2.6 confirmed (owner: the only image model on GPT now) and the reference-picture model is GPT 6 Astra: props line now 'GPT 6 Astra in Codex created reference pictures with GPT Images 2.6', both checks cleared (Opus/Fable che
+243:**03:56.** Cover v8: left hand and arm darkened to 0.72 (owner: try darker). Hand = the board layer left of the board's left edge (x 600 at y 585, leaning 2.08 deg) minus the hinge, plus the thumb on the board's face (R-B under 24 where the slate is 31+), 3 px soft edge. The slate is still measured on the untouched frame. [taste: owner review]
+244:**03:56.** Owner: revert the darker hand. Hand shading removed from make_cover.py; cover_v8_white rebuilt as before.
+245:**03:57.** Owner: cover final, cover/cover_v8_white_630x500.png (mirrored world, white stroke, black glow, sketched revolver lowered 48 px). Back to the description.
+261:**04:30.** Owner: page ready; only the dotted items wait on the main thread. Cleared the tags and AI Disclosure checks (owner ok'd both earlier). Credits checked against SUBMISSION.md's sourced list: every in-build row is covered (Quaternius UAL, Mixamo, Stein Games pistol and rifle, LonesomeDucky scope, VSCO 2, ambientCG and Po
+[... 66 more characters not shown]
+```
+
+**Mon 16 Nov 07:38:01 · Tool call: Read**
+
+```
+{
+ "file_path": "[notes]\\unreal\\megajam-2026\\lanes\\itch1\\tools\\make_cover.py"
+}
+```
+
+Result:
+
+```
+1	"""itch.io cover for SUPERCUT (630x500): the colour clapperboard over a set that is sketch on the left and normal
+2	on the right, the sketched revolver in front against the dark normal side, from the pagepics2 capture (main aac85cd, one still camera).
+3	
+4	  A = matte beauty, HUD off, C2+0.60  board up and whole, colour hands and revolver, sketch world
+5	  B = cover frame, HUD on, C2-0.05    normal world, no board (the HUD's crosshair and parts are behind the board
+6	                                      or outside the crop)
+7	  G = matte beauty, HUD off, C2+1.00  pure sketch, the board gone, the sketched revolver and hand raised
+8	
+9	The engine's own masks of the first-person meshes (matte/mask, hard edged) cut the layers; nothing is guessed from
+10	frame differences any more. The colour revolver is taken out of A's mask (the sketched one replaces it).
+11	
+12	Layers, back to front: world (G left of a slanted line behind the board; right of it B mirrored left to right, so
+13	the dark normal set sits behind the pale sketched revolver: B's own revolver is on its right, so the mirrored left
+14	half shows the set without it, and G's revolver is on its right, outside the half used); the board and left hand
+15	from A, with an optional stroke and glow round them; the vector logo (art/logo_supercut_2000.png, from
+16	tools/make_logo.py, in the board's ink) centred on the slate and tilted with the board; the sketched revolver
+17	and hand from G, lowered GUN_DROP px (owner: cover less of the T), with the same stroke and glow, in front of
+18	everything.
+19	
+20	Run: python -I tools/make_cover.py [style: none|paper|yellow|ink|white, default white]   (from the lane folder).
+21	Writes cover/cover_v8_<style>_*.png and shots/cover_v8_<style>_*.png.
+22	"""
+23	import sys
+24	from pathlib import Path
+25	
+26	import numpy as np
+27	from PIL import Image
+28	from scipy import ndimage as nd
+29	
+30	LANE = Path(__file__).resolve().parent.parent
+31	CAP = Path("D:/UE/Builds/pagepics2")
+32	LOGO = LANE / "art/logo_supercut_2000.png"   # drawn in the board's ink, (64, 53, 20)
+33	LOGO_W = 610                  # px in the crop, on a slate about 636 wide (owner: bigger than the old title's 539)
+34	# style: stroke colour, stroke width (px, full frame), glow colour, glow reach (px, full frame), glow strength
+35	PAPER, YELLOW, INK = (240, 236, 225), (225, 192, 71), (24, 20, 8)   # the page's text, link yellow, near-black
+36	STYLES = {"none": None, "paper": (PAPER, 6, PAPER, 28, 0.85), "yellow":
+[... 6201 more characters not shown]
+```
+
+**Mon 16 Nov 07:38:13 · Tool call: Bash** (Dump the cover's full 1920x1080 composite to see what a 16:9 frame can hold)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/itch1" && SP="C:/Users/USER/AppData/Local/Temp/claude/ce66ae306241b5fa/b35475cb-6af4-41f4-a60b-9e0272f471b9/scratchpad" && sed -e 's#^x0, y0, x1, y1 = CROP#Image.fromarray(comp.clip(0,255).astype(np.uint8)).save(r"'"$SP"'/comp_full.png"); raise SystemExit("dumped")\nx0, y0, x1, y1 = CROP#' -e 's#^LANE = .*#LANE = Path(r"'"$PWD"'")#' tools/make_cover.py > "$SP/cover_dump.py" && python -I "$SP/cover_dump.py" white; python -I -c "
+from PIL import Image; im=Image.open(r'$SP/comp_full.png'); im.resize((960,540)).save(r'$SP/comp_full_960.jpg',quality=88)
+import numpy as np; a=np.asarray(im).mean(axis=(1,2)); print('row means top',[round(v) for v in a[100:125:4]],'bottom',[round(v) for v in a[950:975:4]])"
+```
+
+Result:
+
+```
+Exit code 1
+board sides x 600..1238, slate y 470..700 at x 918, tilt 2.08 deg
+Traceback (most recent call last):
+  File "C:\Users\USER\AppData\Local\Temp\claude\ce66ae306241b5fa\b35475cb-6af4-41f4-a60b-9e0272f471b9\scratchpad\cover_dump.py", line 130, in <module>
+    logo = Image.open(LOGO)
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python312\Lib\site-packages\PIL\Image.py", line 3635, in open
+    fp = builtins.open(filename, "rb")
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '\\d\\[notes]\\unreal\\megajam-2026\\lanes\\itch1\\art\\logo_supercut_2000.png'
+Traceback (most recent call last):
+  File "<string>", line 2, in <module>
+  File "C:\Users\USER\AppData\Local\Programs\Python\Python312\Lib\site-packages\PIL\Image.py", line 3635, in open
+    fp = builtins.open(filename, "rb")
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:/Users/USER/AppData/Local/Temp/claude/ce66ae306241b5fa/b35475cb-6af4-41f4-a60b-9e0272f471b9/scratchpad/comp_full.png'
+```
+
+**Mon 16 Nov 07:38:19 · Tool call: Bash** (Rerun the composite dump with a fixed lane path)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/itch1" && SP="C:/Users/USER/AppData/Local/Temp/claude/ce66ae306241b5fa/b35475cb-6af4-41f4-a60b-9e0272f471b9/scratchpad" && sed -i 's#^LANE = .*#LANE = Path(r"[notes]/unreal/megajam-2026/lanes/itch1")#' "$SP/cover_dump.py" && python -I "$SP/cover_dump.py" white; python -I -c "
+from PIL import Image; im=Image.open(r'$SP/comp_full.png'); im.resize((960,540)).save(r'$SP/comp_full_960.jpg',quality=88)
+import numpy as np; a=np.asarray(im).astype(float).mean(axis=(1,2)); print('rows 100-124',[round(v) for v in a[100:125:3]]); print('rows 950-974',[round(v) for v in a[950:975:3]])
+c=np.asarray(im).astype(float).mean(axis=(0,2)); print('cols mean every 80',[round(v) for v in c[::80]])"
+```
+
+Result:
+
+```
+board sides x 600..1238, slate y 470..700 at x 918, tilt 2.08 deg
+dumped
+rows 100-124 [122, 122, 123, 122, 122, 122, 122, 122, 121]
+rows 950-974 [159, 159, 159, 159, 164, 165, 164, 166, 166]
+cols mean every 80 [209, 218, 213, 207, 213, 220, 212, 193, 169, 199, 170, 140, 163, 94, 106, 117, 109, 114, 98, 66, 44, 55, 48, 46]
+```
+
+**Mon 16 Nov 07:38:23 · Tool call: Read**
+
+```
+{
+ "file_path": "C:\\Users\\USER\\AppData\\Local\\Temp\\claude\\ce66ae306241b5fa\\b35475cb-6af4-41f4-a60b-9e0272f471b9\\scratchpad\\comp_full_960.jpg"
+}
+```
+
+Result:
+
+```
+[image]
+```
+
+### Mon 16 Nov 07:38:35 · Agent (claude-opus-5-5)
+
+Making a 16:9 version of the cover from the same full-frame composite. Checking where the HUD sits so the crop stays clear of it.
+
+**Mon 16 Nov 07:38:36 · Tool call: Bash** (Cut close-ups of the HUD areas at the bottom and right edge)
+
+```
+SP="C:/Users/USER/AppData/Local/Temp/claude/ce66ae306241b5fa/b35475cb-6af4-41f4-a60b-9e0272f471b9/scratchpad" && python -I -c "
+from PIL import Image
+im=Image.open(r'$SP/comp_full.png')
+im.crop((600,900,1920,1080)).save(r'$SP/bottom_strip.png')
+im.crop((1700,450,1920,750)).save(r'$SP/right_strip.png')
+"
+```
+
+Result:
+
+```
+(Bash completed with no output)
+```
+
+**Mon 16 Nov 07:38:39 · Tool call: Read**
+
+```
+{
+ "file_path": "C:\\Users\\USER\\AppData\\Local\\Temp\\claude\\ce66ae306241b5fa\\b35475cb-6af4-41f4-a60b-9e0272f471b9\\scratchpad\\bottom_strip.png"
+}
+```
+
+Result:
+
+```
+[image]
+```
+
+**Mon 16 Nov 07:38:40 · Tool call: Read**
+
+```
+{
+ "file_path": "C:\\Users\\USER\\AppData\\Local\\Temp\\claude\\ce66ae306241b5fa\\b35475cb-6af4-41f4-a60b-9e0272f471b9\\scratchpad\\right_strip.png"
+}
+```
+
+Result:
+
+```
+[image]
+```
+
+**Mon 16 Nov 07:38:51 · Tool call: Bash** (Add a 16:9 YouTube output to the cover script and rebuild)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/itch1" && python -I - <<'EOF'
+p = "tools/make_cover.py"
+s = open(p, encoding="utf-8").read()
+s = s.replace('''CROP = (365, 112, 1436, 962)  # x0, y0, x1, y1 in the 1920x1080 frame: inside the letterbox, left of the HUD cylinder
+''', '''CROP = (365, 112, 1436, 962)  # x0, y0, x1, y1 in the 1920x1080 frame: inside the letterbox, left of the HUD cylinder
+# YouTube thumbnail, 16:9 (owner, 16 Nov): centred on the slate (x 918), above the HUD's clapper icons and the
+# mirrored health bar (both start at y 995) and left of a HUD icon at the right edge (x 1890 on)
+YT_CROP = (118, 80, 1718, 980)
+''')
+s = s.replace('''Writes cover/cover_v8_<style>_*.png and shots/cover_v8_<style>_*.png.''',
+ '''Writes cover/cover_v8_<style>_*.png, the YouTube thumbnail cover/cover_v8_<style>_youtube_1280x720.jpg and
+shots/cover_v8_<style>_*.png.''')
+s = s.replace('''print(f"wrote cover/cover_v8_{STYLE}_630x500.png")''',
+ '''yt = Image.fromarray(comp[YT_CROP[1]:YT_CROP[3], YT_CROP[0]:YT_CROP[2]].clip(0, 255).astype(np.uint8))
+yt.resize((1280, 720), Image.LANCZOS).save(LANE / f"cover/cover_v8_{STYLE}_youtube_1280x720.jpg", quality=92)
+print(f"wrote cover/cover_v8_{STYLE}_630x500.png and cover/cover_v8_{STYLE}_youtube_1280x720.jpg")''')
+open(p, "w", encoding="utf-8").write(s)
+EOF
+md5sum cover/cover_v8_white_630x500.png && python -I tools/make_cover.py white && md5sum cover/cover_v8_white_630x500.png && python -I -c "
+from PIL import Image; import os; p='cover/cover_v8_white_youtube_1280x720.jpg'; print(Image.open(p).size, os.path.getsize(p))"
+```
+
+Result:
+
+```
+c112aaf9b0ff16055d423025b1e70e5c *cover/cover_v8_white_630x500.png
+board sides x 600..1238, slate y 470..700 at x 918, tilt 2.08 deg
+wrote cover/cover_v8_white_630x500.png and cover/cover_v8_white_youtube_1280x720.jpg
+c112aaf9b0ff16055d423025b1e70e5c *cover/cover_v8_white_630x500.png
+(1280, 720) 285445
+```
+
+**Mon 16 Nov 07:38:54 · Tool call: Read**
+
+```
+{
+ "file_path": "[notes]\\unreal\\megajam-2026\\lanes\\itch1\\cover\\cover_v8_white_youtube_1280x720.jpg"
+}
+```
+
+Result:
+
+```
+[image]
+```
+
+**Mon 16 Nov 07:39:00 · Tool call: Bash** (Log the YouTube thumbnail and add it to the handoff file table)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/itch1" && T=$(date +%H:%M) && echo $T && cat >> LOG.md <<EOF
+**$T.** Owner: the thumbnail 16:9 for YouTube. tools/make_cover.py now also writes cover/cover_v8_white_youtube_1280x720.jpg (1280x720, 285 KB, YouTube's limit is 2 MB): the same composite as the cover, cropped (118, 80, 1718, 980) in the 1920x1080 frame, centred on the slate. It stops above the HUD's clapper icons and the mirrored health bar (both from y 995) and left of a HUD icon at the right edge (x 1890 on); checked by eye, no HUD in it. The 630x500 cover is unchanged (same md5 before and after). The logo stays, as on the approved cover. [taste: owner review]
+EOF
+python -I - <<'EOF'
+p = "HANDOFF.md"
+s = open(p, encoding="utf-8").read()
+old = "| `cover/cover_v8_white_630x500.png` | The cover (630x500), final. `cover_v8_white_315x250_check.png` is the small-size check. |\n"
+assert old in s
+s = s.replace(old, old + "| `cover/cover_v8_white_youtube_1280x720.jpg` | The same picture at 16:9 for the YouTube thumbnail (1280x720, 285 KB). Same script. |\n")
+open(p, "w", encoding="utf-8").write(s)
+EOF
+grep -n youtube HANDOFF.md | cut -c1-80
+```
+
+Result:
+
+```
+07:39
+12:| `cover/cover_v8_white_youtube_1280x720.jpg` | The same picture at 16:9 for
+```
+
+### Mon 16 Nov 07:39:06 · Agent (claude-opus-5-5)
+
+I made the YouTube thumbnail: [cover_v8_white_youtube_1280x720.jpg](<[notes]/unreal/megajam-2026/lanes/itch1/cover/cover_v8_white_youtube_1280x720.jpg>)
+
+![YouTube thumbnail](<[notes]/unreal/megajam-2026/lanes/itch1/cover/cover_v8_white_youtube_1280x720.jpg>)
+
+- **What it shows:** the same picture as the itch cover, just framed wider. The slate stays centred, with the sketched set on the left and the real set on the right. It keeps the white outline and the lowered sketched revolver.
+- **Size:** 1280x720 JPG at 285 KB. YouTube allows up to 2 MB.
+- **HUD:** the frame ends just above the bottom HUD (the clapper icons and the health bar) and just short of a HUD icon at the right edge. I checked the image and no HUD shows.
+- **Logo:** I kept it, as on the cover you approved `[taste: owner review]`. The studio's thumbnail rule says no text, but it was written for [another platform] thumbnails and the logo is the game's title on the board. Say if you want a version without it.
+- **Script:** [make_cover.py](<[notes]/unreal/megajam-2026/lanes/itch1/tools/make_cover.py>) now builds both images. The itch cover file came out byte-for-byte the same as before.
+
+The thumbnail is added to the log and the handoff.
+
+Skills used: studio-tools
+
+### Mon 16 Nov 07:40:53 · Brief from the orchestrating agent
+
+video link https://[video-site].be/NiNL1RUXLBE
+
+**Mon 16 Nov 07:40:56 · Tool call: Bash** (Find the video slot in the mock)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/itch1" && grep -n -i 'video\|trailer\|youtube' mock.html | cut -c1-260
+```
+
+Result:
+
+```
+37:.video { aspect-ratio: 16 / 9; margin: 6px 0 4px; }
+100:    <div class="slot video">Gameplay video, full column width<br>(YouTube or Vimeo, public; pasted into the description, see LOG.md)<br>not started: waits for the owner's go</div>
+```
+
+**Mon 16 Nov 07:40:58 · Tool call: Bash** (Read the video slot's surroundings and what the log says about it)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/itch1" && sed -n 30,40p mock.html && sed -n 95,104p mock.html && grep -n -i 'video' LOG.md | cut -c1-300 | head
+```
+
+Result:
+
+```
+.review b { color: #fff3b0; }
+.review button { font: inherit; margin-left: 4px; cursor: pointer; }
+.wrapper { padding: 40px 16px 80px; }
+.inner_column { max-width: 960px; margin: 0 auto; background: var(--bg2); }
+.header img { display: block; width: 100%; height: auto; }
+.columns { display: flex; gap: 28px; padding: 8px 28px 28px; }
+.left_col { flex: 1 1 auto; min-width: 0; }
+.video { aspect-ratio: 16 / 9; margin: 6px 0 4px; }
+.gif { width: 75%; margin: 18px auto 6px; }
+.row3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 16px 0 4px; }
+.row3 .slot { margin: 0; font-size: 12px; }
+  <div class="header"><img src="art/banner.png" alt="SUPERCUT"></div>
+
+  <div class="columns">
+  <div class="left_col">
+
+    <div class="slot video">Gameplay video, full column width<br>(YouTube or Vimeo, public; pasted into the description, see LOG.md)<br>not started: waits for the owner's go</div>
+    <h3 class="short">Cut. Shoot. Action.</h3>
+
+    <h2>The set</h2>
+    <p><strong>SUPERCUT</strong> is a roguelike
+13:  only after asking itch staff. Video embeds: YouTube, Vimeo, Sketchfab, must be public.
+15:  name, gameplay video link 30 to 60 s; optional dev log link (Glass Box), tools used, NVIDIA and OpenAI sections.
+77:cards sit dark over its white set `[taste: owner review]`. (2) Video across the top: mock is now one column,
+78:video slot first, screenshots as a row of three under the first section. itch's docs place the trailer field in
+80:description, or the editor's Video button, embeds it there. To confirm in the editor. (3) Director shooting and
+135:clapperboard in view, and the logo. Gameplay video also after all lanes. Names on the page: the owner chose two
+140:**00:19. Formatting 1: the short line.** Owner: under the video, header font, centred, smaller than the
+201:**01:23.** Main thread 01:24 facts in: over 125 agents (125 Claude sessions, Codex not counted), 6.2 billion tokens processed (27 million written), DLSS row VIDEO > DLSS MODE with OFF/DLAA/QUALITY/BALANCED/PERFORMANCE, off by default; 45 + 13 Rodin props, rodin6 revolver, rodin4/5 clapperboard =
+```
+
+**Mon 16 Nov 07:41:05 · Tool call: Bash** (Read the log's note on itch video placement and check the video is publicly embeddable)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/itch1" && sed -n 76,81p LOG.md; curl -s -m 15 "https://www.youtube.com/oembed?url=https://[video-site].be/NiNL1RUXLBE&format=json"; echo; date +%H:%M
+```
+
+Result:
+
+```
+bad seam means a fresh generation. My pick for the column on a bright page: keep it dark, as the game's HUD and
+cards sit dark over its white set `[taste: owner review]`. (2) Video across the top: mock is now one column,
+video slot first, screenshots as a row of three under the first section. itch's docs place the trailer field in
+the sidebar; community posts (not official docs) say a YouTube or Vimeo link pasted on its own line in the
+description, or the editor's Video button, embeds it there. To confirm in the editor. (3) Director shooting and
+cutting: my view, fine (see reply). (4) He rewords the copy himself. (5) "two-person studio" written; he said
+{"title":"SUPERCUT | Gameplay Trailer | 2026 Epic AI MegaJam","author_name":"[account]","author_url":"https://www.youtube.com/@[account]","type":"video","height":113,"width":200,"version":"1.0","provider_name":"YouTube","provider_url":"https://www.youtube.com/","thumbnail_height":360,"thumbnail_width":480,"thumbnail_url":"https://i.ytimg.com/vi/NiNL1RUXLBE/hqdefault.jpg","html":"\u003ciframe width=\u0022200\u0022 height=\u0022113\u0022 src=\u0022https://www.youtube.com/embed/NiNL1RUXLBE?feature=oembed\u0022 frameborder=\u00220\u0022 allow=\u0022accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\u0022 referrerpolicy=\u0022strict-origin-when-cross-origin\u0022 allowfullscreen title=\u0022SUPERCUT | Gameplay Trailer | 2026 Epic AI MegaJam\u0022\u003e\u003c/iframe\u003e"}
+07:41
+```
+
+**Mon 16 Nov 07:41:15 · Tool call: Bash** (Embed the trailer in the mock and record it in the log and handoff)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/itch1" && python -I - <<'EOF'
+p = "mock.html"
+s = open(p, encoding="utf-8").read()
+old = '''    <div class="slot video">Gameplay video, full column width<br>(YouTube or Vimeo, public; pasted into the description, see LOG.md)<br>not started: waits for the owner's go</div>'''
+new = '''    <iframe class="video" src="https://www.youtube.com/embed/NiNL1RUXLBE" title="SUPERCUT | Gameplay Trailer | 2026 Epic AI MegaJam" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'''
+assert s.count(old) == 1
+s = s.replace(old, new)
+s = s.replace(".video { aspect-ratio: 16 / 9; margin: 6px 0 4px; }", ".video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; margin: 6px 0 4px; }")
+open(p, "w", encoding="utf-8").write(s)
+EOF
+grep -n 'NiNL1RUXLBE\|^\.video' mock.html | cut -c1-120
+cat >> LOG.md <<'EOF'
+**07:41.** Owner: video link https://[video-site].be/NiNL1RUXLBE. YouTube's oEmbed answers for it (public, embeddable; title "SUPERCUT | Gameplay Trailer | 2026 Epic AI MegaJam"). Mock: the video slot at the top of the column is now the embed (https://www.youtube.com/embed/NiNL1RUXLBE), full column width, 16:9. A YouTube embed can refuse to play from a file:// page (no referrer); that is the mock, not the video. On itch: put the link in the edit page's video field, and in the description use the editor's video button (or the link on its own line) at the top; confirm the embed in the draft's preview.
+EOF
+python -I - <<'EOF'
+p = "HANDOFF.md"
+s = open(p, encoding="utf-8").read()
+old = "- The gameplay video slot: not started, the owner's call.\n"
+assert old in s
+s = s.replace(old, "")
+s = s.replace("## Moving it onto itch\n", "## Moving it onto itch\n\n- Gameplay video: https://[video-site].be/NiNL1RUXLBE (public, embeddable, checked 07:41). Paste it in the edit page's video\n  field, and embed it at the top of the description with the editor's video button; check it plays in the draft's preview.\n", 1)
+open(p, "w", encoding="utf-8").write(s)
+EOF
+grep -n '[video-site]' HANDOFF.md | cut -c1-100
+```
+
+Result:
+
+```
+37:.video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border: 0; margin: 6px 0 4px; }
+100:    <iframe class="video" src="https://www.youtube.com/embed/NiNL1RUXLBE" title="SUPERCUT | Gameplay Trailer | 2026 
+12:| `cover/cover_v8_white_youtube_1280x720.jpg` | The same picture at 16:9 for the YouTube thumbnai
+43:- Gameplay video: https://[video-site].be/NiNL1RUXLBE (public, embeddable, checked 07:41). Paste it in t
+```
+
+**Mon 16 Nov 07:41:20 · Tool call: Bash** (Measure the gap under the embedded video in headless Chrome)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/itch1" && SP="C:/Users/USER/AppData/Local/Temp/claude/ce66ae306241b5fa/b35475cb-6af4-41f4-a60b-9e0272f471b9/scratchpad" && python -I "$SP/measure.py" mock.html "$SP" | head -3
+```
+
+Result:
+
+```
+14 | iframe.video https://www.youtube.com/embed/  ->  h3.short Cut. Shoot. Action.
+30 | h3.short Cut. Shoot. Action.  ->  h2 The set
+8 | h2 The set  ->  p SUPERCUT is a roguelike fi
+```
+
+### Mon 16 Nov 07:41:26 · Agent (claude-opus-5-5)
+
+The trailer is now embedded at the top of the mock, where the video placeholder was. It runs the full column width at 16:9, and the spacing under it is the same as before.
+
+- **Checked:** YouTube's public embed lookup answers for the link, so the video is public and can be embedded. The title reads "SUPERCUT | Gameplay Trailer | 2026 Epic AI MegaJam".
+- **In the mock:** the embed may not play when you open `mock.html` straight from disk, because YouTube sometimes blocks local files. That's the mock, not the video.
+- **On itch:** paste the link into the edit page's video field. Then embed it at the top of the description with the editor's video button, or by putting the link on its own line. Check it plays in the draft preview.
+
+[LOG.md](<[notes]/unreal/megajam-2026/lanes/itch1/LOG.md>) and [HANDOFF.md](<[notes]/unreal/megajam-2026/lanes/itch1/HANDOFF.md>) are updated. The only dotted item left is the dev log link, which you're vetting.
+
+### Mon 16 Nov 07:45:03 · Brief from the orchestrating agent
+
+do we make the itrch page before submitting? hjow do we do that
+
+**Mon 16 Nov 07:45:09 · Tool call: Bash** (Check the official jam rules for what they say about the itch page)
+
+```
+cd "[notes]/unreal/megajam-2026" && ls rules/ && grep -n -i -E 'itch|public|draft|visib|project page|submission page' rules/*.txt | cut -c1-260 | head -40
+```
+
+Result:
+
+```
+official_rules_2026-11-05.pdf
+official_rules_2026-11-05.txt
+8:INTERNATIONAL PUBLIC POLICY (WHICH INCLUDES IRAN, IRAQ, NORTH 
+23:Games, Inc. and its affiliates ("Sponsor"), via https://itch.io/jam/2026-epic-ai-megajam. 
+25:Sponsor's Unreal Engine livestream (reachable via https://www.twitch.tv/unrealengine and 
+66:were granted), but only in connection with publicizing the Contest. ENTRANTS WILL NOT 
+174:party, including, but not limited to, copyright, trademark, privacy, publicity or any other 
+385:party right including any copyright, trademark, privacy, publicity or other intellectual property 
+394:when such rights were granted), but only in connection with publicizing the Contest. 
+443:CLAIMS BASED ON PUBLICITY RIGHTS, DEFAMATION, INVASION OF PRIVACY, 
+458:outbreak of disease or other public health hazard, natural disasters, weather, or labor dispute or 
+594:(h) Language. These Official Rules are drafted in English. An Italian translation will be made
+```
+
+**Mon 16 Nov 07:45:12 · Tool call: Bash** (Find the submission section of the rules and any form draft files)
+
+```
+cd "[notes]/unreal/megajam-2026" && grep -n -i -E 'submit|submission|deadline|video|download' rules/official_rules_2026-11-05.txt | cut -c1-200 | head -40; ls lanes/ | head -50; ls *.md
+```
+
+Result:
+
+```
+20:1. How to Enter. Online submissions only. Entrants ("Entrant(s)") can submit a playable product 
+28:Submissions (a) must be created by a team of one (1) to five (5) Entrants; (b) in the case of UE 
+29:Submissions, must be packaged for Windows and playable on Windows 10 or 11, macOS, Android, 
+30:or iOS and, in the case of UEFN Submissions, must be submitted as a private version code of the 
+32:email address of all Entrants on a submitting team, identifying one of them as the team owner (the 
+34:upon submission, subject to the Intellectual Property section; (e) include a video short (between 
+35:30-60 seconds) demonstrating recorded gameplay of the Submission ("Video"). All contact 
+36:information provided must be current, accurate, and valid; and (f) if submitting as a Student 
+37:Submission, all Entrants in a team must be Student Entrants, as outlined in the Eligibility section 
+38:(Classification of "Student Entrant"). See Submission Guidelines for additional requirements. 
+39:UE is available at: https://www.unrealengine.com/en-US/download. Eligible Entrants can access 
+53:2. Submissions. All entry information, Videos, and playable product shall be collectively referred to 
+54:herein as the "Submissions" or each as a "Submission." Submissions must comply with the 
+57:Submission: (a) entrant is the sole and exclusive owner of the Submission and entrant has all 
+58:appropriate rights, powers and authority to grant Sponsor all licenses to the Submission as 
+59:set forth herein; (b) the Submission will not infringe on any rights of any third parties. 
+63:derivative works of, distribute, perform, and display the Submission in any and all media or 
+67:BE SPECIFICALLY PAID FOR THEIR SUBMISSIONS or for granting Sponsor any of 
+68:these rights. While Sponsor will seek to post the Submission in the form as provided at the 
+70:such entrant's Submission may be altered from its original form and that Sponsor reserves 
+71:the right to modify the Submission in its sole discretion, including adding its logo or other 
+72:trademarks. Sponsor may post Submissions in any order or sequence, with or without 
+74:Limit one (1) Submission per team. Entrants are not permitted to submit a Submission more than 
+75:once during the Contest Period. Duplicate Submissions by the same person will be subject to 
+90:human or electronic. Proof of submission will not be deemed to be proof of receipt by Sponsor. By 
+120:currently enrolled at a higher-educational institution. A Submission c
+[... 1777 more characters not shown]
+```
+
+**Mon 16 Nov 07:45:15 · Tool call: Bash** (Read the rules' how-to-enter and video lines and look for the form lane)
+
+```
+cd "[notes]/unreal/megajam-2026" && sed -n 20,36p rules/official_rules_2026-11-05.txt; sed -n 136,141p rules/official_rules_2026-11-05.txt; ls lanes/formfinal1/ 2>/dev/null; ls lanes | grep -i -E 'form|itch|submit'
+```
+
+Result:
+
+```
+1. How to Enter. Online submissions only. Entrants ("Entrant(s)") can submit a playable product 
+created using Unreal Engine ("UE") or Unreal Editor for Fortnite ("UEFN") that relates to the 
+relevant theme provided by Epic Games (the "Contest Theme") to the Contest page of Epic 
+Games, Inc. and its affiliates ("Sponsor"), via https://itch.io/jam/2026-epic-ai-megajam. 
+The Contest Theme will be provided at the start of the Contest Period and made available via 
+Sponsor's Unreal Engine livestream (reachable via https://www.twitch.tv/unrealengine and 
+https://www.youtube.com/unrealengine), X (formerly Twitter) account (reachable via 
+https://x.com/UnrealEngine). 
+Submissions (a) must be created by a team of one (1) to five (5) Entrants; (b) in the case of UE 
+Submissions, must be packaged for Windows and playable on Windows 10 or 11, macOS, Android, 
+or iOS and, in the case of UEFN Submissions, must be submitted as a private version code of the 
+island, created within the contest period, that is playable in Fortnite; (c) include the full name and 
+email address of all Entrants on a submitting team, identifying one of them as the team owner (the 
+"Team Owner"); (d) may include sourced (non-original) assets, but the sourced assets must be noted 
+upon submission, subject to the Intellectual Property section; (e) include a video short (between 
+30-60 seconds) demonstrating recorded gameplay of the Submission ("Video"). All contact 
+information provided must be current, accurate, and valid; and (f) if submitting as a Student 
+or gameplay, such as writing gameplay code, generating assets, or powering a system within 
+the game.  
+(b) Submissions must be submitted according to the How to Enter section and directly accessible 
+by Sponsor. 
+(c) Submissions must be accompanied by a Video of the gameplay. Resolution of the Video must 
+match 1920x1080 or higher; 
+HANDOFF.md
+formfinal1
+itch1
+submit1
+```
+
+**Mon 16 Nov 07:45:20 · Tool call: Bash** (Look at the submit lane's handoff for the planned submission steps)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes" && ls submit1 formfinal1; head -40 submit1/HANDOFF.md 2>/dev/null
+```
+
+Result:
+
+```
+Exit code 1
+formfinal1:
+HANDOFF.md
+
+submit1:
+BRIEF.md
+FORM_DRAFT.md
+LOG.md
+REPORT.md
+logs
+shots
+tools
+```
+
+**Mon 16 Nov 07:45:22 · Tool call: Bash** (Pull the submit lane's notes on how the itch submission works)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes" && grep -n -i -E 'itch|draft|public|step|submit|project page|visib' submit1/REPORT.md formfinal1/HANDOFF.md | cut -c1-240 | head -40
+```
+
+Result:
+
+```
+submit1/REPORT.md:1:# submit1 report: is the SUPERCUT Shipping package ready to submit?
+submit1/REPORT.md:3:15 Nov 2026, lane submit1, from c4. Package checked: `D:\UE\Builds\Supercut59_ship\Windows`, built on c4 today from
+submit1/REPORT.md:6:changed, no worktree. Running notes: [LOG.md](<[notes]/unreal/megajam-2026/lanes/submit1/LOG.md>).
+submit1/REPORT.md:15:   [FORM_DRAFT.md](<[notes]/unreal/megajam-2026/lanes/submit1/FORM_DRAFT.md>).
+submit1/REPORT.md:18:3. **Dev log not reachable by judges, history not scrubbed.** Glass Box needs it submitted with the entry inside the
+submit1/REPORT.md:26:   [zip_test.ps1](<[notes]/unreal/megajam-2026/lanes/submit1/tools/zip_test.ps1>) or by eye.
+submit1/REPORT.md:50:Script [ports_sample.ps1](<[notes]/unreal/megajam-2026/lanes/submit1/tools/ports_sample.ps1>),
+submit1/REPORT.md:51:started by [run_ship.sh](<[notes]/unreal/megajam-2026/lanes/submit1/tools/run_ship.sh>) next to the
+submit1/REPORT.md:55:`D:\UE\submit1_farm\logs\first\sockets.txt`, summary copied to `logs/first_ports_summary.txt`.
+submit1/REPORT.md:77:Script [pkg_contents.py](<[notes]/unreal/megajam-2026/lanes/submit1/tools/pkg_contents.py>),
+submit1/REPORT.md:116:Script [private_strings.py](<[notes]/unreal/megajam-2026/lanes/submit1/tools/private_strings.py>),
+submit1/REPORT.md:118:[names_file.sh](<[notes]/unreal/megajam-2026/lanes/submit1/tools/names_file.sh>) into a scratch
+submit1/REPORT.md:145:Run: the same run as job 1. [run_ship.sh](<[notes]/unreal/megajam-2026/lanes/submit1/tools/run_ship.sh>)
+submit1/REPORT.md:167:Pictures, 960 wide, in [shots](<[notes]/unreal/megajam-2026/lanes/submit1/shots>):
+submit1/REPORT.md:169:- ![title at 0.1 s](<[notes]/unreal/megajam-2026/lanes/submit1/shots/first_submit1_title.jpg>)
+submit1/REPORT.md:170:  `first_submit1_title.jpg`, title at 0.1 s. The menu is still fading in: an empty grey box where it will be, and a pale
+submit1/REPORT.md:172:- ![title at 2 s](<[notes]/unreal/megajam-2026/lanes/submit1/shots/first_submit1_title_2s.jpg>)
+submit1/REPORT.md:173:  `first_submit1_title_2s.jpg`, title at 2 s: START (slate stripes), SETTINGS, CREDITS, QUIT, key hints. No logo. No fault.
+submit1/REPORT.md:198:| Tools list complete | Met as far as I can s
+[... 1987 more characters not shown]
+```
+
+### Mon 16 Nov 07:45:39 · Agent (claude-opus-5-5)
+
+Yes. On itch you build the game's page first, as its own project, and then submit that project to the jam. Doing it as a draft is fine, because only you can see a draft until you publish it.
+
+It's 07:45 and the deadline is 09:59, so start with the upload. The 638 MB zip will take a while.
+
+**1. Create the project**
+Go to itch.io, then Dashboard, then **Create new project**, and fill in the edit page. Here's where each part of the mock goes:
+
+| Field | What to enter |
+| --- | --- |
+| Title | SUPERCUT |
+| Classification / Kind | Game, Downloadable |
+| Release status | In development |
+| Pricing | No payments |
+| Uploads | `D:\UE\Builds\entry_f6\[studio]_SUPERCUT.zip`, with **Windows** ticked |
+| Description | Copy it section by section from the mock. Put the trailer link on its own line at the top. |
+| Genre, Tags, AI disclosure | As in the mock's More information block |
+| Cover image | [cover_v8_white_630x500.png](<[notes]/unreal/megajam-2026/lanes/itch1/cover/cover_v8_white_630x500.png>) |
+| Gameplay video | https://[video-site].be/NiNL1RUXLBE |
+| Screenshots | The stills from `stills/` |
+| Visibility | **Draft** for now |
+
+Then press Save.
+
+**2. Theme the page**
+Open the saved page and click **Edit theme** in the bar at the top. Set the banner ([banner.png](<[notes]/unreal/megajam-2026/lanes/itch1/art/banner.png>)), the background (the moving GIF) and the colours and fonts from [THEME.md](<[notes]/unreal/megajam-2026/lanes/itch1/THEME.md>). While you're there, check that the GIF moves and that the trailer plays.
+
+**3. Submit to the jam**
+On https://itch.io/jam/2026-epic-ai-megajam, press **Submit your project** and pick SUPERCUT. Fill in the jam's own questions from the main thread's [FORM_DRAFT.md](<[notes]/unreal/megajam-2026/lanes/submit1/FORM_DRAFT.md>): names and emails, the Team Owner, sourced assets, tools and AI used, and the dev log. Then you press Submit. The rules (section 17) say a person has to do that.
+
+**Draft or public?** The rules say the entry must be "directly accessible by Sponsor". As far as I know, itch hides a draft from the jam's entries until it's public. I haven't checked that on the live site, so set the page to **Public** before 09:59 to be safe. You can keep editing it afterwards.
+
+Two things to delete when you paste the description:
+- the yellow review bar at the top of the mock
+- the "List checked against SUBMISSION.md" line
+
+The dev log link stays out until the repo opens for visitors.
+
+If you're already signed in to itch in your browser, I can fill the draft fields you name, one save at a time, and tell you before each save. I won't sign in, publish or submit.
+
+### Mon 16 Nov 07:45:53 · Brief from the orchestrating agent
+
+desktop cua on my current open window and fill up everything
+
+**Mon 16 Nov 07:45:57 · Tool call: ToolSearch**
+
+```
+{
+ "query": "select:mcp__cua-computer-use__list_windows,mcp__cua-computer-use__get_browser_state,mcp__cua-computer-use__browser_prepare,mcp__cua-computer-use__browser_click,mcp__cua-computer-use__browser_type,mcp__cua-computer-use__browser_set_input_files,mcp__cua-computer-use__page,mcp__cua-computer-use__get_window_state,mcp__cua-computer-use__run_steps,mcp__cua-computer-use__browser_select,mcp__cua-computer-use__browser_navigate,mcp__cua-computer-use__get_guide",
+ "max_results": 12
+}
+```
+
+Result:
+
+```
+
+```
+
+**Mon 16 Nov 07:45:59 · Tool call: mcp__cua-computer-use__list_windows**
+
+```
+{
+ "app": "chrome",
+ "on_screen_only": true,
+ "session": "itch1"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:46:00 · Tool call: Bash** (placeholder)
+
+```
+echo check
+```
+
+Result:
+
+```
+check
+```
+
+**Mon 16 Nov 07:46:03 · Tool call: mcp__cua-computer-use__list_windows**
+
+```
+{
+ "on_screen_only": true,
+ "session": "itch1"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:46:06 · Tool call: mcp__cua-computer-use__get_window_state**
+
+```
+{
+ "pid": 31804,
+ "window_id": 592628,
+ "session": "itch1",
+ "max_elements": 400,
+ "timeout_ms": 5000,
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:46:18 · Agent (claude-opus-5-5)
+
+The itch "Create a new project" page is open in Firefox. Reading the form fields and the mock's text so I can fill them in.
+
+**Mon 16 Nov 07:46:18 · Tool call: Bash** (Read the mock's page body and sidebar fields)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/itch1" && sed -n 95,200p mock.html
+```
+
+Result:
+
+```
+<div class="header"><img src="art/banner.png" alt="SUPERCUT"></div>
+
+  <div class="columns">
+  <div class="left_col">
+
+    <iframe class="video" src="https://www.youtube.com/embed/NiNL1RUXLBE" title="SUPERCUT | Gameplay Trailer | 2026 Epic AI MegaJam" allow="encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <h3 class="short">Cut. Shoot. Action.</h3>
+
+    <h2>The set</h2>
+    <p><strong>SUPERCUT</strong> is a roguelike
+    first-person shooter on a movie studio's bare film set. You alone are the director, and rogue mannequins have overrun
+    your set. <strong>With only a revolver and a clapperboard, it's your job to take them all down.</strong></p>
+    <p>Clap the board and the scene freezes into a pencil sketch. Fire into the freeze and every shot hangs in the air
+    until the scene rolls again. There is no end to the madness... the shoot goes on until you die.</p>
+
+    <img class="gifpic" src="gif/supercut_freeze_560_aac85cd.gif" alt="Clap to freeze, one shot at each mannequin, then the scene rolls">
+
+    <h2>Cut &raquo; Action</h2>
+    <ul>
+      <li><strong>Clap the board</strong> and the scene freezes into a pencil sketch.</li>
+      <li><strong>Shoot during the freeze.</strong> Your bullets hang in the air.</li>
+      <li><strong>Action.</strong> Watch the mannequins fall as time unfreezes.</li>
+    </ul>
+    <div class="row3">
+      <img class="pic" src="stills/s1_clap_C1+0.200_aac85cd.jpg" alt="The clap">
+      <img class="pic" src="stills/s2_hang_C1+3.500_aac85cd.jpg" alt="Bullets hanging in the freeze">
+      <img class="pic" src="stills/s3_action_C1+4.300_aac85cd.jpg" alt="Action">
+    </div>
+    <h3 class="short">WATCH your charges... They are limited.</h3>
+
+    <h2>Rewrites &amp; Last Rites</h2>
+    <ul>
+      <li><strong>Pick a perk.</strong> Every few scenes, pick one of three perks, or reroll for a new hand.</li>
+      <li><strong>Shifting sets.</strong> Scenes are procedurally generated, so be wary of every angle.</li>
+      <li><strong>Endless Mode.</strong> Past scene 10, there are no more perks, and one hit will kill you.</li>
+    </ul>
+    <img class="pic" style="margin-top: 16px;" src="stills/perks_endless_pair.jpg" alt="Left: three perk cards and the reroll button. Right: the ENDLESS MODE banner, ONE HIT WILL KILL YOU.">
+
+    <h2>Controls</h2>
+    <p>Keyboard and mouse. Every key can be rebound in the settings, with a fully fledged menu to customize everyt
+[... 4420 more characters not shown]
+```
+
+**Mon 16 Nov 07:46:24 · Tool call: Bash** (Find the agreed tagline and project URL)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/itch1" && grep -n -i 'tagline\|short desc\|project url\|supercut\.itch\|slug' mock.html LOG.md HANDOFF.md | cut -c1-250 | head -20
+```
+
+Result:
+
+```
+LOG.md:145:**00:28.** Tagline (owner's words): "Cut. Shoot. Action."
+LOG.md:272:**04:45.** Owner: check padding everywhere. Measured every gap in the left column in headless Chrome (scratchpad measure.py). Even already: text to picture 16, picture or tagline to the next heading 30, h3 to its list 6, list to the next h
+```
+
+**Mon 16 Nov 07:46:29 · Tool call: mcp__cua-computer-use__get_window_state**
+
+```
+{
+ "pid": 31804,
+ "window_id": 592628,
+ "session": "itch1",
+ "query": "Create a new project",
+ "max_elements": 5000,
+ "timeout_ms": 30000,
+ "include_screenshot": false
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:46:35 · Tool call: ToolSearch**
+
+```
+{
+ "query": "select:mcp__cua-computer-use__click,mcp__cua-computer-use__type_text,mcp__cua-computer-use__press_key,mcp__cua-computer-use__hotkey,mcp__cua-computer-use__scroll,mcp__cua-computer-use__zoom",
+ "max_results": 6
+}
+```
+
+Result:
+
+```
+
+```
+
+**Mon 16 Nov 07:46:38 · Tool call: mcp__cua-computer-use__get_window_state**
+
+```
+{
+ "pid": 31804,
+ "window_id": 592628,
+ "session": "itch1",
+ "include_accessibility_tree": false,
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:46:40 · Tool call: mcp__cua-computer-use__type_text**
+
+```
+{
+ "pid": 31804,
+ "window_id": 592628,
+ "session": "itch1",
+ "x": 550,
+ "y": 277,
+ "text": "SUPERCUT"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:46:44 · Tool call: mcp__cua-computer-use__zoom**
+
+```
+{
+ "pid": 31804,
+ "window_id": 592628,
+ "session": "itch1",
+ "x1": 370,
+ "y1": 240,
+ "x2": 730,
+ "y2": 420
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:46:47 · Tool call: mcp__cua-computer-use__type_text**
+
+```
+{
+ "pid": 31804,
+ "window_id": 592628,
+ "session": "itch1",
+ "x": 550,
+ "y": 277,
+ "text": "SUPERCUT",
+ "delivery_mode": "foreground"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:46:49 · Tool call: mcp__cua-computer-use__get_window_state**
+
+```
+{
+ "pid": 31804,
+ "window_id": 592628,
+ "session": "itch1",
+ "include_accessibility_tree": false,
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:46:53 · Tool call: mcp__cua-computer-use__type_text**
+
+```
+{
+ "pid": 31804,
+ "window_id": 592628,
+ "session": "itch1",
+ "x": 550,
+ "y": 409,
+ "text": "Cut. Shoot. Action.",
+ "delivery_mode": "foreground"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:46:54 · Tool call: mcp__cua-computer-use__type_text**
+
+```
+{
+ "pid": 31804,
+ "window_id": 592628,
+ "session": "itch1",
+ "x": 832,
+ "y": 449,
+ "text": "https://www.youtube.com/watch?v=NiNL1RUXLBE",
+ "delivery_mode": "foreground"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:46:57 · Agent (claude-opus-5-5)
+
+Now the release status dropdown.
+
+**Mon 16 Nov 07:46:58 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "pid": 31804,
+ "window_id": 592628,
+ "session": "itch1",
+ "x": 550,
+ "y": 608,
+ "delivery_mode": "foreground"
+}
+```
+
+**Mon 16 Nov 07:46:59 · Tool call: mcp__cua-computer-use__get_window_state**
+
+```
+{
+ "pid": 31804,
+ "window_id": 592628,
+ "session": "itch1",
+ "include_accessibility_tree": false,
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:47:03 · Tool call: mcp__cua-computer-use__run_steps**
+
+```
+{
+ "session": "itch1",
+ "pid": 31804,
+ "window_id": 592628,
+ "delivery_mode": "foreground",
+ "delay_ms": 300,
+ "steps": [
+  {
+   "tool": "press_key",
+   "args": {
+    "key": "i"
+   }
+  },
+  {
+   "tool": "press_key",
+   "args": {
+    "key": "return"
+   }
+  }
+ ]
+}
+```
+
+**Mon 16 Nov 07:47:04 · Tool call: mcp__cua-computer-use__get_window_state**
+
+```
+{
+ "pid": 31804,
+ "window_id": 592628,
+ "session": "itch1",
+ "include_accessibility_tree": false,
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:47:11 · Tool call: mcp__cua-computer-use__get_window_state**
+
+```
+{
+ "pid": 31804,
+ "window_id": 592628,
+ "session": "itch1",
+ "query": "Released",
+ "max_elements": 30000,
+ "timeout_ms": 60000,
+ "include_screenshot": false
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:47:14 · Tool call: ToolSearch**
+
+```
+{
+ "query": "select:mcp__cua-computer-use__get_desktop_state,mcp__cua-computer-use__clipboard_write",
+ "max_results": 2
+}
+```
+
+Result:
+
+```
+
+```
+
+**Mon 16 Nov 07:47:17 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "pid": 31804,
+ "window_id": 592628,
+ "session": "itch1",
+ "x": 550,
+ "y": 608,
+ "delivery_mode": "foreground"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:47:17 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:47:21 · Agent (claude-opus-5-5)
+
+Release status is set to "In development". Next: pricing and the fields below it.
+
+**Mon 16 Nov 07:47:21 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 665,
+ "y": 681
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:47:22 · Tool call: mcp__cua-computer-use__scroll**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 650,
+ "y": 500,
+ "direction": "down",
+ "amount": 10
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:47:22 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:47:28 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 410,
+ "y": 149
+}
+```
+
+**Mon 16 Nov 07:47:28 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:47:32 · Tool call: mcp__cua-computer-use__list_windows**
+
+```
+{
+ "pid": 31804,
+ "session": "itch1",
+ "on_screen_only": true
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:47:35 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 410,
+ "y": 149
+}
+```
+
+**Mon 16 Nov 07:47:35 · Tool call: mcp__cua-computer-use__list_windows**
+
+```
+{
+ "session": "itch1",
+ "app": "firefox"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:47:39 · Tool call: mcp__cua-computer-use__get_window_state**
+
+```
+{
+ "pid": 14328,
+ "window_id": 396410,
+ "session": "itch1",
+ "query": "File name",
+ "max_image_dimension": 900
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:47:41 · Tool call: mcp__cua-computer-use__run_steps**
+
+```
+{
+ "session": "itch1",
+ "pid": 14328,
+ "window_id": 396410,
+ "steps": [
+  {
+   "tool": "set_value",
+   "args": {
+    "element_token": "s00000004:142",
+    "value": "D:\\UE\\Builds\\entry_f6\\[studio]_SUPERCUT.zip"
+   }
+  },
+  {
+   "tool": "click",
+   "args": {
+    "role": "button",
+    "name": "Open"
+   }
+  }
+ ]
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:47:44 · Agent (claude-opus-5-5)
+
+The zip upload dialog is open. Typing the path in.
+
+**Mon 16 Nov 07:47:45 · Tool call: mcp__cua-computer-use__type_text**
+
+```
+{
+ "pid": 14328,
+ "window_id": 396410,
+ "session": "itch1",
+ "x": 430,
+ "y": 460,
+ "text": "D:\\UE\\Builds\\entry_f6\\[studio]_SUPERCUT.zip",
+ "delivery_mode": "foreground"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:47:46 · Tool call: mcp__cua-computer-use__get_window_state**
+
+```
+{
+ "pid": 14328,
+ "window_id": 396410,
+ "session": "itch1",
+ "query": "File name",
+ "include_screenshot": false,
+ "tree_format": "elements"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:47:48 · Tool call: mcp__cua-computer-use__run_steps**
+
+```
+{
+ "session": "itch1",
+ "pid": 14328,
+ "window_id": 396410,
+ "steps": [
+  {
+   "tool": "click",
+   "args": {
+    "role": "button",
+    "name": "Open"
+   }
+  }
+ ]
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:47:48 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:47:50 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 767,
+ "y": 461
+}
+```
+
+**Mon 16 Nov 07:47:50 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:48:03 · Agent (claude-opus-5-5)
+
+The zip is uploading. Next I'm writing the description into the editor's HTML source view, then adding the pictures.
+
+**Mon 16 Nov 07:48:04 · Tool call: Bash** (List the stills and GIF and check how the three stills were meant to sit on itch)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/itch1" && ls -la stills/ gif/ | grep -v d7f5ad8 | head -30; grep -n -i 'row of three\|row3\|three stills\|stack' LOG.md | cut -c1-250 | tail -6
+```
+
+Result:
+
+```
+gif/:
+total 5516
+drwxr-xr-x 1 [user] 197121       0 Nov 16 03:42 .
+drwxr-xr-x 1 [user] 197121       0 Nov 16 07:02 ..
+-rw-r--r-- 1 [user] 197121 2788400 Nov 16 01:48 supercut_freeze_560.gif
+-rw-r--r-- 1 [user] 197121 2847091 Nov 16 03:42 supercut_freeze_560_aac85cd.gif
+
+stills/:
+total 1020
+drwxr-xr-x 1 [user] 197121      0 Nov 16 04:28 .
+drwxr-xr-x 1 [user] 197121      0 Nov 16 07:02 ..
+-rw-r--r-- 1 [user] 197121  70632 Nov 16 04:28 endless_crop_E+0.250_57bcac5.jpg
+-rw-r--r-- 1 [user] 197121  47744 Nov 16 04:13 perkcards_crop_loop1_a1.jpg
+-rw-r--r-- 1 [user] 197121  87999 Nov 16 04:28 perks_endless_pair.jpg
+-rw-r--r-- 1 [user] 197121 115876 Nov 16 01:48 s1_clap_C1+0.200.jpg
+-rw-r--r-- 1 [user] 197121 114985 Nov 16 03:42 s1_clap_C1+0.200_aac85cd.jpg
+-rw-r--r-- 1 [user] 197121 168352 Nov 16 01:48 s2_hang_C1+3.500.jpg
+-rw-r--r-- 1 [user] 197121 168969 Nov 16 03:42 s2_hang_C1+3.500_aac85cd.jpg
+-rw-r--r-- 1 [user] 197121 118990 Nov 16 01:48 s3_action_C1+4.300.jpg
+-rw-r--r-- 1 [user] 197121 118659 Nov 16 03:42 s3_action_C1+4.300_aac85cd.jpg
+94:4.11 (rows 361..660, 300 tall); c 3.92 vs 3.79 (rows 326..640, 315 tall). Looked at the stacks: b and c show no
+107:`bg_c_tile_devgrid.png`, stacks `stackgrid_b.jpg`, `stackgrid_c.jpg`. Looked: grid continuous across joins,
+117:stacked; fixed. Outer tower edges at x 324 (b) and 326 (c): a 1920 window shows x 320 to 2240, so all four
+155:**00:50.** Under CUT » ACTION (owner): a row of three 16:9 screenshot slots, one per bullet, no captions on the page; then a centred header-font line, first wording 'Watch your HUD. Health and charges are limited.' (owner's idea, my wording). Sh
+213:**01:49.** Capture frames in (pagepics1, 01:29). Cover v1: cover/cover_v1_630x500.png, colour board (C2+0.55) in front of a world split normal (C2-0.05, left) / sketch (right), board mask from the difference with C2+1.0, split line hidden behind 
+271:**04:43.** Owner: gap from the Endless bullet to the picture pair differed from Cut » Action's gap to its stills (6 px vs 16 px: .row3 has a 16 px top margin, .pic none). Pair given margin-top 16px. Mock only; on itch the theme spaces images.
+```
+
+**Mon 16 Nov 07:48:11 · Tool call: Bash** (Join the three Cut » Action stills into one row image for itch)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/itch1" && python -I - <<'EOF'
+from PIL import Image
+names = ["s1_clap_C1+0.200_aac85cd.jpg", "s2_hang_C1+3.500_aac85cd.jpg", "s3_action_C1+4.300_aac85cd.jpg"]
+W, H, G = 640, 360, 12   # same halves size, gap and colour as perks_endless_pair.jpg
+row = Image.new("RGB", (3 * W + 2 * G, H), (24, 24, 26))
+for i, n in enumerate(names):
+    row.paste(Image.open(f"stills/{n}").convert("RGB").resize((W, H), Image.LANCZOS), (i * (W + G), 0))
+row.save("stills/cut_action_row3.jpg", quality=90)
+print(row.size)
+EOF
+ls -la stills/cut_action_row3.jpg
+```
+
+Result:
+
+```
+(1944, 360)
+-rw-r--r-- 1 [user] 197121 198879 Nov 16 07:48 stills/cut_action_row3.jpg
+```
+
+**Mon 16 Nov 07:48:27 · Tool call: Write**
+
+```
+{
+ "file_path": "[notes]\\unreal\\megajam-2026\\lanes\\itch1\\itch_description.html",
+ "content": "<p><iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/NiNL1RUXLBE\" frameborder=\"0\" allowfullscreen></iframe></p>\n<h3 style=\"text-align: center;\">Cut. Shoot. Action.</h3>\n<h2>The set</h2>\n<p><strong>SUPERCUT</strong> is a roguelike first-person shooter on a movie studio's bare film set. You alone are the director, and rogue mannequins have overrun your set. <strong>With only a revolver and a clapperboard, it's your job to take them all down.</strong></p>\n<p>Clap the board and the scene freezes into a pencil sketch. Fire into the freeze and every shot hangs in the air until the scene rolls again. There is no end to the madness... the shoot goes on until you die.</p>\n<p>IMGGIF</p>\n<h2>Cut » Action</h2>\n<ul>\n<li><strong>Clap the board</strong> and the scene freezes into a pencil sketch.</li>\n<li><strong>Shoot during the freeze.</strong> Your bullets hang in the air.</li>\n<li><strong>Action.</strong> Watch the mannequins fall as time unfreezes.</li>\n</ul>\n<p>IMGROW</p>\n<h3 style=\"text-align: center;\">WATCH your charges... They are limited.</h3>\n<h2>Rewrites &amp; Last Rites</h2>\n<ul>\n<li><strong>Pick a perk.</strong> Every few scenes, pick one of three perks, or reroll for a new hand.</li>\n<li><strong>Shifting sets.</strong> Scenes are procedurally generated, so be wary of every angle.</li>\n<li><strong>Endless Mode.</strong> Past scene 10, there are no more perks, and one hit will kill you.</li>\n</ul>\n<p>IMGPAIR</p>\n<h2>Controls</h2>\n<p>Keyboard and mouse. Every key can be rebound in the settings, with a fully fledged menu to customize everything.</p>\n<h3>Movement</h3>\n<ul>\n<li><strong>W</strong> <strong>A</strong> <strong>S</strong> <strong>D</strong> move, <strong>Space</strong> jump, mouse to look</li>\n</ul>\n<h3>Shooting</h3>\n<ul>\n<li><strong>Left mouse</strong> fire, <strong>R</strong> reload</li>\n<li><strong>Right mouse</strong> clap to freeze the scene</li>\n</ul>\n<h3>Perk cards</h3>\n<ul>\n<li><strong>1</strong> <strong>2</strong> <strong>3</strong> or click a card to pick it, <strong>R</strong> or the button to reroll</li>\n</ul>\n<h3>Other</h3>\n<ul>\n<li><strong>Esc</strong> pause: settings, controls, credits, quit</li>\n</ul>\n<h2>Download</h2>\n<p><strong>Windows 10 / 11, 64-bit. Unzip and run Supercut.exe in the SUPERCUT folder, no install or internet connection needed.</strong></p>\n<h2>How it was made</h2>\n<p>[studio] Studios is a two-person studio. We built SUPERCUT during the jam in Unreal Engine 5.9 (C++), working with AI agents. This is our first Unreal Engine project, and it was a blast to work in. 76 hours of non-stop work, <strong>over 135 agents</strong> deployed, <strong>6.7 billion tokens</strong> processed.</p>\n<h3>What agents did</h3>\n<ul>\n<li><strong>Code:</strong> Claude Fable 5.2 ran as the orchestrator and handed the work to 136 agents on Fable 5.2 for open-ended work, Opus 5.5 for well-scoped tasks, and Sonnet 5.5 for playtesting and code reading.</li>\n<li><strong>3D:</strong> GPT 6 Astra made reference pictures with GPT Images 2.6, and agents turned them into the props, the revolver and the clapperboard through Hyper3D Rodin. Agents built the remaining set in Blender.</li>\n<li><strong>2D:</strong> GPT 6.1 Sol and GPT 6 Astra drew the perk and HUD icons with GPT Images 2.6. The particle and sketch textures were drawn by code.</li>\n<li><strong>Sound:</strong> 52 of the 61 sound effects were cut from CC0 recordings and 9 were synthesized in Python. The soundtrack was produced in REAPER by agents.</li>\n</ul>\n<h2>Credits</h2>\n<p>Sourced assets, each listed with its licence on the game's CREDITS screen:</p>\n<ul>\n<li><strong>Animation:</strong> Universal Animation Library by Quaternius (CC0); clips from Mixamo.</li>\n<li><strong>Models:</strong> Quixel Megascans via Fab; Poly Haven (CC0); pistol and rifle by Stein Games (CC0); rifle scope by LonesomeDucky (CC0); \"hands\" by Store Page on Fab (CC BY 4.0, modified).</li>\n<li><strong>Textures:</strong> ambientCG and Poly Haven (CC0).</li>\n<li><strong>Sound:</strong> CC0 recordings from bigsoundbank.com, opengameart.org, Kenney and happysoulmusic.com; VSCO 2 Community Edition strings (CC0).</li>\n<li><strong>Fonts:</strong> Exo 2 and Saira (SIL Open Font License 1.1).</li>\n<li><strong>Upscaling:</strong> NVIDIA DLSS plugin.</li>\n</ul>\n"
+}
+```
+
+Result:
+
+```
+File created successfully at: [notes]\unreal\megajam-2026\lanes\itch1\itch_description.html (file state is current in your context — no need to Read it back)
+```
+
+**Mon 16 Nov 07:48:31 · Tool call: PowerShell** (Put the description HTML on the clipboard)
+
+```
+Get-Content -Raw -Encoding UTF8 "[notes]\unreal\megajam-2026\lanes\itch1\itch_description.html" | Set-Clipboard; (Get-Clipboard -Raw).Length
+```
+
+Result:
+
+```
+4284
+```
+
+**Mon 16 Nov 07:48:32 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 393,
+ "y": 379
+}
+```
+
+**Mon 16 Nov 07:48:32 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:48:39 · Tool call: mcp__cua-computer-use__list_windows**
+
+```
+{
+ "session": "itch1",
+ "app": "firefox"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:48:41 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 393,
+ "y": 508
+}
+```
+
+**Mon 16 Nov 07:48:42 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:48:47 · Tool call: mcp__cua-computer-use__hotkey**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "keys": [
+  "ctrl",
+  "v"
+ ]
+}
+```
+
+**Mon 16 Nov 07:48:47 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:48:49 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 393,
+ "y": 508
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:48:49 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:48:52 · Tool call: mcp__cua-computer-use__scroll**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 850,
+ "y": 400,
+ "direction": "down",
+ "amount": 8
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:48:53 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:48:57 · Tool call: mcp__cua-computer-use__run_steps**
+
+```
+{
+ "session": "itch1",
+ "steps": [
+  {
+   "tool": "double_click",
+   "args": {
+    "scope": "desktop",
+    "x": 403,
+    "y": 405
+   }
+  },
+  {
+   "tool": "press_key",
+   "args": {
+    "scope": "desktop",
+    "key": "delete"
+   }
+  },
+  {
+   "tool": "click",
+   "args": {
+    "scope": "desktop",
+    "x": 669,
+    "y": 51
+   }
+  }
+ ],
+ "delay_ms": 400
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:48:57 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:48:59 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 403,
+ "y": 405,
+ "count": 2
+}
+```
+
+**Mon 16 Nov 07:49:00 · Tool call: mcp__cua-computer-use__press_key**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "key": "delete"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:01 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 669,
+ "y": 51
+}
+```
+
+**Mon 16 Nov 07:49:01 · Tool call: mcp__cua-computer-use__list_windows**
+
+```
+{
+ "session": "itch1",
+ "app": "firefox"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:03 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:49:05 · Agent (claude-opus-5-5)
+
+Adding the pictures into the description now, starting with the GIF.
+
+**Mon 16 Nov 07:49:05 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 590,
+ "y": 182
+}
+```
+
+**Mon 16 Nov 07:49:06 · Tool call: mcp__cua-computer-use__list_windows**
+
+```
+{
+ "session": "itch1",
+ "app": "firefox"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:10 · Tool call: mcp__cua-computer-use__list_windows**
+
+```
+{
+ "session": "itch1",
+ "app": "firefox"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:13 · Tool call: mcp__cua-computer-use__type_text**
+
+```
+{
+ "session": "itch1",
+ "pid": 25272,
+ "window_id": 12126332,
+ "x": 430,
+ "y": 460,
+ "text": "[notes]\\unreal\\megajam-2026\\lanes\\itch1\\gif\\supercut_freeze_560_aac85cd.gif",
+ "delivery_mode": "foreground"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:14 · Tool call: mcp__cua-computer-use__get_window_state**
+
+```
+{
+ "pid": 25272,
+ "window_id": 12126332,
+ "session": "itch1",
+ "query": "File name",
+ "include_screenshot": false,
+ "tree_format": "elements"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:17 · Tool call: mcp__cua-computer-use__type_text**
+
+```
+{
+ "session": "itch1",
+ "element_token": "s00000007:58",
+ "text": "[notes]\\unreal\\megajam-2026\\lanes\\itch1\\gif\\supercut_freeze_560_aac85cd.gif"
+}
+```
+
+**Mon 16 Nov 07:49:18 · Tool call: mcp__cua-computer-use__press_key**
+
+```
+{
+ "session": "itch1",
+ "element_token": "s00000007:58",
+ "key": "return"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:18 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:21 · Tool call: mcp__cua-computer-use__list_windows**
+
+```
+{
+ "session": "itch1",
+ "app": "firefox"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:24 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:49:28 · Agent (claude-opus-5-5)
+
+The GIF is in. Next I'm adding the three stills and the perk/endless picture.
+
+**Mon 16 Nov 07:49:28 · Tool call: mcp__cua-computer-use__scroll**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 850,
+ "y": 400,
+ "direction": "down",
+ "amount": 5
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:28 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:31 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 405,
+ "y": 527,
+ "count": 2
+}
+```
+
+**Mon 16 Nov 07:49:31 · Tool call: mcp__cua-computer-use__press_key**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "key": "delete"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:32 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 669,
+ "y": 51
+}
+```
+
+**Mon 16 Nov 07:49:33 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:35 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:37 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 590,
+ "y": 182
+}
+```
+
+**Mon 16 Nov 07:49:38 · Tool call: mcp__cua-computer-use__list_windows**
+
+```
+{
+ "session": "itch1",
+ "app": "firefox"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:39 · Tool call: mcp__cua-computer-use__list_windows**
+
+```
+{
+ "session": "itch1",
+ "app": "firefox"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:41 · Tool call: mcp__cua-computer-use__get_window_state**
+
+```
+{
+ "pid": 35696,
+ "window_id": 86772094,
+ "session": "itch1",
+ "query": "File name",
+ "include_screenshot": false
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:43 · Tool call: mcp__cua-computer-use__type_text**
+
+```
+{
+ "session": "itch1",
+ "element_token": "s00000008:48",
+ "text": "[notes]\\unreal\\megajam-2026\\lanes\\itch1\\stills\\perks_endless_pair.jpg"
+}
+```
+
+**Mon 16 Nov 07:49:44 · Tool call: mcp__cua-computer-use__press_key**
+
+```
+{
+ "session": "itch1",
+ "element_token": "s00000008:48",
+ "key": "return"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:49:46 · Agent (claude-opus-5-5)
+
+Now the three stills row.
+
+**Mon 16 Nov 07:49:46 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:47 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:49 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 407,
+ "y": 367,
+ "count": 2
+}
+```
+
+**Mon 16 Nov 07:49:50 · Tool call: mcp__cua-computer-use__press_key**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "key": "delete"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:51 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 669,
+ "y": 51
+}
+```
+
+**Mon 16 Nov 07:49:51 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:53 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 590,
+ "y": 182
+}
+```
+
+**Mon 16 Nov 07:49:54 · Tool call: mcp__cua-computer-use__list_windows**
+
+```
+{
+ "session": "itch1",
+ "app": "firefox"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:56 · Tool call: mcp__cua-computer-use__list_windows**
+
+```
+{
+ "session": "itch1",
+ "app": "firefox"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:49:58 · Tool call: mcp__cua-computer-use__get_window_state**
+
+```
+{
+ "pid": 18640,
+ "window_id": 1247944,
+ "session": "itch1",
+ "query": "File name",
+ "include_screenshot": false
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:50:00 · Tool call: mcp__cua-computer-use__type_text**
+
+```
+{
+ "session": "itch1",
+ "element_token": "s00000009:64",
+ "text": "[notes]\\unreal\\megajam-2026\\lanes\\itch1\\stills\\cut_action_row3.jpg"
+}
+```
+
+**Mon 16 Nov 07:50:00 · Tool call: mcp__cua-computer-use__press_key**
+
+```
+{
+ "session": "itch1",
+ "element_token": "s00000009:64",
+ "key": "return"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:50:06 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:50:08 · Agent (claude-opus-5-5)
+
+All four pictures are in. Re-centring the two tagline lines, which the editor reset to left-aligned.
+
+**Mon 16 Nov 07:50:08 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 520,
+ "y": 446
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:50:09 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 600,
+ "y": 51
+}
+```
+
+**Mon 16 Nov 07:50:10 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:50:12 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 622,
+ "y": 101
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:50:13 · Tool call: mcp__cua-computer-use__scroll**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 850,
+ "y": 400,
+ "direction": "up",
+ "amount": 6
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:50:14 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:50:16 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 450,
+ "y": 289
+}
+```
+
+**Mon 16 Nov 07:50:16 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 600,
+ "y": 51
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:50:17 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 622,
+ "y": 101
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:50:17 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:50:21 · Agent (claude-opus-5-5)
+
+Both taglines are centred. Moving on to genre, tags and AI disclosure.
+
+**Mon 16 Nov 07:50:21 · Tool call: mcp__cua-computer-use__scroll**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 1100,
+ "y": 400,
+ "direction": "down",
+ "amount": 40
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:50:22 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:50:25 · Tool call: mcp__cua-computer-use__scroll**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 1100,
+ "y": 400,
+ "direction": "down",
+ "amount": 50
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:50:25 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:50:28 · Tool call: mcp__cua-computer-use__scroll**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 1100,
+ "y": 400,
+ "direction": "down",
+ "amount": 50
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:50:28 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:50:34 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 550,
+ "y": 195
+}
+```
+
+**Mon 16 Nov 07:50:34 · Tool call: mcp__cua-computer-use__type_text**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "text": "sho",
+ "delay_ms": 20
+}
+```
+
+**Mon 16 Nov 07:50:34 · Tool call: mcp__cua-computer-use__press_key**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "key": "return"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:50:35 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:50:40 · Agent (claude-opus-5-5)
+
+I typed three letters into the description by mistake (the dropdown click missed). Removing them.
+
+**Mon 16 Nov 07:50:41 · Tool call: mcp__cua-computer-use__run_steps**
+
+```
+{
+ "session": "itch1",
+ "pid": 31804,
+ "window_id": 592628,
+ "delivery_mode": "foreground",
+ "delay_ms": 150,
+ "steps": [
+  {
+   "tool": "press_key",
+   "args": {
+    "key": "backspace"
+   }
+  },
+  {
+   "tool": "press_key",
+   "args": {
+    "key": "backspace"
+   }
+  },
+  {
+   "tool": "press_key",
+   "args": {
+    "key": "backspace"
+   }
+  },
+  {
+   "tool": "press_key",
+   "args": {
+    "key": "backspace"
+   }
+  }
+ ]
+}
+```
+
+**Mon 16 Nov 07:50:41 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:50:47 · Agent (claude-opus-5-5)
+
+That made it worse: the backspaces hit the wrong spot and merged two paragraphs. I'll repair it from the HTML source: copy the source out, fix it in a file, and paste it back.
+
+**Mon 16 Nov 07:50:47 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 393,
+ "y": 51
+}
+```
+
+**Mon 16 Nov 07:50:47 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:50:50 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 550,
+ "y": 400
+}
+```
+
+**Mon 16 Nov 07:50:50 · Tool call: mcp__cua-computer-use__hotkey**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "keys": [
+  "ctrl",
+  "a"
+ ]
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:50:51 · Tool call: mcp__cua-computer-use__hotkey**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "keys": [
+  "ctrl",
+  "c"
+ ]
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:50:53 · Tool call: PowerShell** (Read the copied description source from the clipboard)
+
+```
+$c = Get-Clipboard -Raw; $c | Out-File -Encoding utf8 "C:\Users\USER\AppData\Local\Temp\claude\ce66ae306241b5fa\b35475cb-6af4-41f4-a60b-9e0272f471b9\scratchpad\itch_src_copy.html"; $c.Length; $c
+```
+
+Result:
+
+```
+3204
+
+Cut. Shoot. Action.
+The set
+
+SUPERCUT is a roguelike first-person shooter on a movie studio's bare film set. You alone are the director, and rogue mannequins have overrun your set. With only a revolver and a clapperboard, it's your job to take them all down.
+
+Clap the board and the scene freezes into a pencil sketch. Fire into the freeze and every shot hangs in the air until the scene rolls again. There is no end to the madness... the shoot goes on until you die.
+
+Cut » Action
+
+    Clap the board and the scene freezes into a pencil sketch.
+    Shoot during the freeze. Your bullets hang in the air.
+    Action. Watch the mannequins fall as time unfreezes.
+
+WATCH your charges... They are limited.
+Rewrites & Last Rites
+
+    Pick a perk. Every few scenes, pick one of three perks, or reroll for a new hand.
+    Shifting sets. Scenes are procedurally generated, so be wary of every angle.
+    Endless Mode. Past scene 10, there are no more perks, and one hit will kill you.
+
+Controls
+
+Keyboard and mouse. Every key can be rebound in the settings, with a fully fledged menu to customize everything.
+Movement
+
+    W A S D move, Space jump, mouse to look
+
+Shooting
+
+    Left mouse fire, R reload
+    Right mouse clap to freeze the scene
+
+Perk cards
+
+    1 2 3 or click a card to pick it, R or the button to reroll
+
+Other
+
+    Esc pause: settings, controls, credits, quit
+
+Download
+
+Windows 10 / 11, 64-bit. Unzip and run Supercut.exe in the SUPERCUT folder, no install or internet connection needed.sho
+
+How it was made
+
+[studio] Studios is a two-person studio. We built SUPERCUT during the jam in Unreal Engine 5.9 (C++), working with AI agents. This is our first Unreal Engine project, and it was a blast to work in. 76 hours of non-stop work, over 135 agents deployed, 6.7 billion tokens processed.
+What agents did
+
+    Code: Claude Fable 5.2 ran as the orchestrator and handed the work to 136 agents on Fable 5.2 for open-ended work, Opus 5.5 for well-scoped tasks, and Sonnet 5.5 for playtesting and code reading.
+    3D: GPT 6 Astra made reference pictures with GPT Images 2.6, and agents turned them into the props, the revolver and the clapperboard through Hyper3D Rodin. Agents built the remaining set in Blender.
+    2D: GPT 6.1 Sol and GPT 6 Astra drew the perk and HUD icons with GPT Images 2.6. The particle and sketch textures were drawn by code.
+    Sound: 52 of the 61 sound effects were cut from CC0 recordings and 9 were 
+[... 708 more characters not shown]
+```
+
+**Mon 16 Nov 07:50:59 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:51:04 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 393,
+ "y": 51
+}
+```
+
+**Mon 16 Nov 07:51:04 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:51:08 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 550,
+ "y": 400
+}
+```
+
+**Mon 16 Nov 07:51:08 · Tool call: mcp__cua-computer-use__hotkey**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "keys": [
+  "ctrl",
+  "a"
+ ]
+}
+```
+
+**Mon 16 Nov 07:51:09 · Tool call: mcp__cua-computer-use__hotkey**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "keys": [
+  "ctrl",
+  "c"
+ ]
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:51:11 · Tool call: PowerShell** (Read the copied description HTML source from the clipboard)
+
+```
+$c = Get-Clipboard -Raw; [IO.File]::WriteAllText("C:\Users\USER\AppData\Local\Temp\claude\ce66ae306241b5fa\b35475cb-6af4-41f4-a60b-9e0272f471b9\scratchpad\itch_src_copy.html", $c); $c.Length; $c
+```
+
+Result:
+
+```
+4601
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/NiNL1RUXLBE" frameborder="0" allowfullscreen=""></iframe></p>
+<h3 class="text-center">Cut. Shoot. Action.</h3>
+<h2>The set</h2>
+<p><strong>SUPERCUT</strong> is a roguelike first-person shooter on a movie studio's bare film set. You alone are the director, and rogue mannequins have overrun your set. <strong>With only a revolver and a clapperboard, it's your job to take them all down.</strong></p>
+<p>Clap the board and the scene freezes into a pencil sketch. Fire into the freeze and every shot hangs in the air until the scene rolls again. There is no end to the madness... the shoot goes on until you die.</p>
+<p><img src="https://img.itch.zone/aW1nLzMyMzQ5ODAwLmdpZg==/original/aKlIH6.gif"></p>
+<h2>Cut » Action</h2>
+<ul>
+<li><strong>Clap the board</strong> and the scene freezes into a pencil sketch.</li>
+<li><strong>Shoot during the freeze.</strong> Your bullets hang in the air.</li>
+<li><strong>Action.</strong> Watch the mannequins fall as time unfreezes.</li>
+</ul>
+<p><img src="https://img.itch.zone/aW1nLzMyMzQ5ODM5LmpwZw==/original/k8Mx%2FS.jpg"></p>
+<h3 class="text-center">WATCH your charges... They are limited.</h3>
+<h2>Rewrites &amp; Last Rites</h2>
+<ul>
+<li><strong>Pick a perk.</strong> Every few scenes, pick one of three perks, or reroll for a new hand.</li>
+<li><strong>Shifting sets.</strong> Scenes are procedurally generated, so be wary of every angle.</li>
+<li><strong>Endless Mode.</strong> Past scene 10, there are no more perks, and one hit will kill you.</li>
+</ul>
+<p><img src="https://img.itch.zone/aW1nLzMyMzQ5ODI4LmpwZw==/original/IZcWJZ.jpg"></p>
+<h2>Controls</h2>
+<p>Keyboard and mouse. Every key can be rebound in the settings, with a fully fledged menu to customize everything.</p>
+<h3>Movement</h3>
+<ul>
+<li><strong>W</strong> <strong>A</strong> <strong>S</strong> <strong>D</strong> move, <strong>Space</strong> jump, mouse to look</li>
+</ul>
+<h3>Shooting</h3>
+<ul>
+<li><strong>Left mouse</strong> fire, <strong>R</strong> reload</li>
+<li><strong>Right mouse</strong> clap to freeze the scene</li>
+</ul>
+<h3>Perk cards</h3>
+<ul>
+<li><strong>1</strong> <strong>2</strong> <strong>3</strong> or click a card to pick it, <strong>R</strong> or the button to reroll</li>
+</ul>
+<h3>Other</h3>
+<ul>
+<li><strong>Esc</strong> pause: settings, controls, credits, quit</li>
+</ul>
+<h2>Download</h2>
+<p><strong>Windows 10 / 11, 64-bit. Unzip and run Su
+[... 2107 more characters not shown]
+```
+
+### Mon 16 Nov 07:51:16 · Agent (claude-opus-5-5)
+
+The source is intact apart from three leftovers from the slip. Fixing those and pasting the clean source back.
+
+**Mon 16 Nov 07:51:20 · Tool call: Bash** (Fix the leftovers in the copied source and put the clean HTML on the clipboard)
+
+```
+SP="C:/Users/USER/AppData/Local/Temp/claude/ce66ae306241b5fa/b35475cb-6af4-41f4-a60b-9e0272f471b9/scratchpad" && cd "[notes]/unreal/megajam-2026/lanes/itch1" && python -I - "$SP" <<'EOF'
+import sys
+sp = sys.argv[1]
+s = open(f"{sp}/itch_src_copy.html", encoding="utf-8").read()
+fixes = [
+    ("needed.sho<br><br></strong></p>", "needed.</strong></p>"),
+    ("<p></p>\n", ""),
+    ("<p><strong>[studio] Studios</strong> is a two-person studio. We built <strong>SUPERCUT</strong> during",
+     "<p>[studio] Studios is a two-person studio. We built SUPERCUT during"),
+]
+for a, b in fixes:
+    assert s.count(a) == 1, a
+    s = s.replace(a, b)
+open(f"{sp}/itch_src_fixed.html", "w", encoding="utf-8").write(s)
+# the live source, with the itch-hosted picture URLs, is the record of what is on the draft
+open("itch_description.html", "w", encoding="utf-8").write(s)
+print("ok", len(s))
+EOF
+powershell -NoProfile -Command "Get-Content -Raw -Encoding UTF8 '[notes]\unreal\megajam-2026\lanes\itch1\itch_description.html' | Set-Clipboard; (Get-Clipboard -Raw).Length"
+```
+
+Result:
+
+```
+ok 4487
+4547
+```
+
+### Mon 16 Nov 07:51:22 · Brief from the orchestrating agent
+
+it was me bolding.
+
+**Mon 16 Nov 07:51:31 · Tool call: Bash** (Put the owner's bold back in the clean source and re-copy it)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/itch1" && python -I - <<'EOF'
+p = "itch_description.html"
+s = open(p, encoding="utf-8").read()
+a = "<p>[studio] Studios is a two-person studio. We built SUPERCUT during"
+assert s.count(a) == 1
+s = s.replace(a, "<p><strong>[studio] Studios</strong> is a two-person studio. We built <strong>SUPERCUT</strong> during")
+open(p, "w", encoding="utf-8").write(s)
+EOF
+powershell -NoProfile -Command "Get-Content -Raw -Encoding UTF8 '[notes]\unreal\megajam-2026\lanes\itch1\itch_description.html' | Set-Clipboard; (Get-Clipboard -Raw).Length"
+```
+
+Result:
+
+```
+4581
+```
+
+**Mon 16 Nov 07:51:34 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:51:37 · Agent (claude-opus-5-5)
+
+Keeping your bold. Swapping in the cleaned source now: it removes the stray "sho" and the empty lines.
+
+**Mon 16 Nov 07:51:37 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 393,
+ "y": 51
+}
+```
+
+**Mon 16 Nov 07:51:37 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:52:53 · Harness
+
+[The session's context was summarised here. The summary is not exported.]
+
+**Mon 16 Nov 07:52:57 · Tool call: PowerShell** (Put the clean description source on the clipboard)
+
+```
+Get-Content -Raw -Encoding UTF8 "[notes]\unreal\megajam-2026\lanes\itch1\itch_description.html" | Set-Clipboard; (Get-Clipboard -Raw).Length
+```
+
+Result:
+
+```
+4581
+```
+
+**Mon 16 Nov 07:52:59 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 540,
+ "y": 400
+}
+```
+
+**Mon 16 Nov 07:52:59 · Tool call: mcp__cua-computer-use__hotkey**
+
+```
+{
+ "session": "itch1",
+ "keys": [
+  "ctrl",
+  "a"
+ ],
+ "delivery_mode": "foreground"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:53:02 · Tool call: mcp__cua-computer-use__hotkey**
+
+```
+{
+ "session": "itch1",
+ "keys": [
+  "ctrl",
+  "a"
+ ],
+ "scope": "desktop"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:53:02 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:53:03 · Agent (claude-opus-5-5)
+
+Selection is inside the source textarea only. Pasting.
+
+**Mon 16 Nov 07:53:04 · Tool call: mcp__cua-computer-use__hotkey**
+
+```
+{
+ "session": "itch1",
+ "keys": [
+  "ctrl",
+  "v"
+ ],
+ "scope": "desktop"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:53:05 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 393,
+ "y": 51
+}
+```
+
+**Mon 16 Nov 07:53:05 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:53:09 · Agent (claude-opus-5-5)
+
+The description is clean now: "needed." with no "sho", no empty line, and your bold is kept. Moving on to Genre.
+
+**Mon 16 Nov 07:53:09 · Tool call: mcp__cua-computer-use__scroll**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 1100,
+ "y": 400,
+ "direction": "down",
+ "amount": 10
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:53:10 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:53:14 · Tool call: mcp__cua-computer-use__zoom**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": "760",
+ "y": "540",
+ "width": "700",
+ "height": "160"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:53:16 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 550,
+ "y": 329
+}
+```
+
+**Mon 16 Nov 07:53:16 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:53:20 · Tool call: mcp__cua-computer-use__type_text**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "text": "Shoot"
+}
+```
+
+**Mon 16 Nov 07:53:20 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:53:22 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 403,
+ "y": 352
+}
+```
+
+**Mon 16 Nov 07:53:22 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 550,
+ "y": 409
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:53:23 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:53:26 · Agent (claude-opus-5-5)
+
+Genre is set to Shooter. Now adding the tags one at a time.
+
+**Mon 16 Nov 07:53:26 · Tool call: mcp__cua-computer-use__type_text**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "text": "fps"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:53:27 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:53:29 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 392,
+ "y": 447
+}
+```
+
+**Mon 16 Nov 07:53:29 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:53:36 · Agent (claude-opus-5-5)
+
+That click added "2d" instead of "fps" (the list reset under it). Removing it.
+
+**Mon 16 Nov 07:53:36 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 408,
+ "y": 409
+}
+```
+
+**Mon 16 Nov 07:53:36 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:53:42 · Agent (claude-opus-5-5)
+
+Removed. Trying the keyboard route instead: typing the tag followed by a comma, which this tag box uses to add the tag.
+
+**Mon 16 Nov 07:53:42 · Tool call: mcp__cua-computer-use__type_text**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "text": "fps,"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:53:42 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:53:46 · Agent (claude-opus-5-5)
+
+Comma works: "fps" is in. Adding the other nine.
+
+**Mon 16 Nov 07:53:46 · Tool call: mcp__cua-computer-use__type_text**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "text": "first-person,roguelike,singleplayer,time-manipulation,unreal-engine,movie,procedural-generation,short,arcade,"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:53:47 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:53:50 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:53:53 · Agent (claude-opus-5-5)
+
+All 10 tags are in. Closing the list and moving to the AI disclosure.
+
+**Mon 16 Nov 07:53:53 · Tool call: ToolSearch**
+
+```
+{
+ "query": "select:mcp__cua-computer-use__press_key",
+ "max_results": 1
+}
+```
+
+Result:
+
+```
+
+```
+
+**Mon 16 Nov 07:53:55 · Tool call: mcp__cua-computer-use__press_key**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "key": "escape"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:53:55 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:53:57 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 391,
+ "y": 500
+}
+```
+
+**Mon 16 Nov 07:53:57 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:54:05 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 396,
+ "y": 590
+}
+```
+
+**Mon 16 Nov 07:54:05 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 456,
+ "y": 590
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:54:05 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 587,
+ "y": 590
+}
+```
+
+**Mon 16 Nov 07:54:06 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:54:08 · Agent (claude-opus-5-5)
+
+AI disclosure: Yes, with Graphics, Sounds and Code ticked. Writing a short AI usage statement taken from the page's own "How it was made" section.
+
+**Mon 16 Nov 07:54:09 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 550,
+ "y": 662
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:54:11 · Tool call: mcp__cua-computer-use__type_text**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "text": "Built with AI agents. The code was written by Claude agents. GPT Images 2.6 made the reference pictures for the props and drew the perk and HUD icons, and Hyper3D Rodin turned the references into 3D props. 9 of the 61 sound effects were synthesized in Python by agents, and agents produced the soundtrack in REAPER. Sourced assets are listed under Credits."
+}
+```
+
+**Mon 16 Nov 07:54:11 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:54:13 · Agent (claude-opus-5-5)
+
+Statement is in. Scrolling to the next block (install instructions).
+
+**Mon 16 Nov 07:54:14 · Tool call: mcp__cua-computer-use__scroll**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 1100,
+ "y": 400,
+ "direction": "down",
+ "amount": 8
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:54:15 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:54:18 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 550,
+ "y": 470
+}
+```
+
+**Mon 16 Nov 07:54:18 · Tool call: mcp__cua-computer-use__type_text**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "text": "Windows 10 / 11, 64-bit. Unzip and run Supercut.exe in the SUPERCUT folder, no install or internet connection needed."
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:54:19 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:54:20 · Agent (claude-opus-5-5)
+
+Install instructions are in. Visibility stays on Draft. Next I'll go to the upload and the cover/screenshot slots in the right column. Scrolling down to check what's under Visibility first.
+
+**Mon 16 Nov 07:54:21 · Tool call: mcp__cua-computer-use__scroll**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 1100,
+ "y": 400,
+ "direction": "down",
+ "amount": 8
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:54:23 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:54:27 · Agent (claude-opus-5-5)
+
+Bottom of the form: Save & view page is here, Draft is selected. I won't press it yet. Going back to the top for the cover and screenshots.
+
+**Mon 16 Nov 07:54:27 · Tool call: mcp__cua-computer-use__scroll**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 1100,
+ "y": 400,
+ "direction": "up",
+ "amount": 80
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:54:28 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:54:31 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:54:34 · Tool call: mcp__cua-computer-use__scroll**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 1100,
+ "y": 400,
+ "direction": "up",
+ "amount": 25
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:54:34 · Tool call: mcp__cua-computer-use__scroll**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 1100,
+ "y": 400,
+ "direction": "up",
+ "amount": 25
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:54:36 · Tool call: mcp__cua-computer-use__scroll**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 1100,
+ "y": 400,
+ "direction": "up",
+ "amount": 25
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:54:36 · Tool call: mcp__cua-computer-use__scroll**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 1100,
+ "y": 400,
+ "direction": "up",
+ "amount": 25
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:54:38 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:54:41 · Agent (claude-opus-5-5)
+
+The zip now shows "Success, 638mb" (the red error box above it looks stale). Ticking Windows as its platform.
+
+**Mon 16 Nov 07:54:41 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 493,
+ "y": 544
+}
+```
+
+**Mon 16 Nov 07:54:41 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:54:44 · Agent (claude-opus-5-5)
+
+Windows is ticked. Next are the screenshots. Checking which stills I have.
+
+**Mon 16 Nov 07:54:44 · Tool call: Bash** (List stills and cover files and handoff notes on screenshots)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/itch1" && ls -la stills cover | head -50; grep -n -i "screenshot\|still" HANDOFF.md | head -30
+```
+
+Result:
+
+```
+cover:
+total 10520
+drwxr-xr-x 1 [user] 197121       0 Nov 16 07:38 .
+drwxr-xr-x 1 [user] 197121       0 Nov 16 07:48 ..
+-rw-r--r-- 1 [user] 197121  132676 Nov 16 01:46 cover_v1_315x250_check.png
+-rw-r--r-- 1 [user] 197121  470539 Nov 16 01:46 cover_v1_630x500.png
+-rw-r--r-- 1 [user] 197121 1087073 Nov 16 01:46 cover_v1_nologo_1071x850.png
+-rw-r--r-- 1 [user] 197121  133062 Nov 16 01:54 cover_v2_315x250_check.png
+-rw-r--r-- 1 [user] 197121  470979 Nov 16 01:54 cover_v2_630x500.png
+-rw-r--r-- 1 [user] 197121 1084268 Nov 16 01:54 cover_v2_nologo_1071x850.png
+-rw-r--r-- 1 [user] 197121  470901 Nov 16 01:55 cover_v3_630x500.png
+-rw-r--r-- 1 [user] 197121 1084740 Nov 16 01:55 cover_v3_nologo_1071x850.png
+-rw-r--r-- 1 [user] 197121  132922 Nov 16 02:02 cover_v4_315x250_check.png
+-rw-r--r-- 1 [user] 197121  470499 Nov 16 02:02 cover_v4_630x500.png
+-rw-r--r-- 1 [user] 197121  133692 Nov 16 02:58 cover_v5_315x250_check.png
+-rw-r--r-- 1 [user] 197121  472575 Nov 16 02:58 cover_v5_630x500.png
+-rw-r--r-- 1 [user] 197121  136588 Nov 16 03:02 cover_v6_ink_315x250_check.png
+-rw-r--r-- 1 [user] 197121  477654 Nov 16 03:02 cover_v6_ink_630x500.png
+-rw-r--r-- 1 [user] 197121  133649 Nov 16 03:02 cover_v6_none_315x250_check.png
+-rw-r--r-- 1 [user] 197121  472507 Nov 16 03:02 cover_v6_none_630x500.png
+-rw-r--r-- 1 [user] 197121  133225 Nov 16 03:02 cover_v6_paper_315x250_check.png
+-rw-r--r-- 1 [user] 197121  468272 Nov 16 03:02 cover_v6_paper_630x500.png
+-rw-r--r-- 1 [user] 197121  135794 Nov 16 03:05 cover_v6_white_315x250_check.png
+-rw-r--r-- 1 [user] 197121  476024 Nov 16 03:05 cover_v6_white_630x500.png
+-rw-r--r-- 1 [user] 197121  135031 Nov 16 03:02 cover_v6_yellow_315x250_check.png
+-rw-r--r-- 1 [user] 197121  474104 Nov 16 03:02 cover_v6_yellow_630x500.png
+-rw-r--r-- 1 [user] 197121  139212 Nov 16 03:47 cover_v7_white_315x250_check.png
+-rw-r--r-- 1 [user] 197121  488771 Nov 16 03:47 cover_v7_white_630x500.png
+-rw-r--r-- 1 [user] 197121  137145 Nov 16 07:38 cover_v8_white_315x250_check.png
+-rw-r--r-- 1 [user] 197121  480511 Nov 16 07:38 cover_v8_white_630x500.png
+-rw-r--r-- 1 [user] 197121  285445 Nov 16 07:38 cover_v8_white_youtube_1280x720.jpg
+
+stills:
+total 1216
+drwxr-xr-x 1 [user] 197121      0 Nov 16 07:48 .
+drwxr-xr-x 1 [user] 197121      0 Nov 16 07:48 ..
+-rw-r--r-- 1 [user] 197121 198879 Nov 16 07:48 cut_action_row3.jpg
+-rw-r--r-- 1 [user] 197121  70632 Nov 16 04:28 
+[... 1491 more characters not shown]
+```
+
+### Mon 16 Nov 07:54:50 · Agent (claude-opus-5-5)
+
+I'll upload five screenshots: the three Cut » Action stills, the perk cards and the Endless Mode banner. Opening the file picker.
+
+**Mon 16 Nov 07:54:50 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 771,
+ "y": 178
+}
+```
+
+**Mon 16 Nov 07:54:50 · Tool call: mcp__cua-computer-use__list_windows**
+
+```
+{
+ "session": "itch1",
+ "app": "firefox"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:54:54 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:54:55 · Agent (claude-opus-5-5)
+
+The file dialog is open and already in the stills folder. Typing the five names.
+
+**Mon 16 Nov 07:54:56 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 420,
+ "y": 442
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:54:57 · Tool call: mcp__cua-computer-use__type_text**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "text": "\"s1_clap_C1+0.200_aac85cd.jpg\" \"s2_hang_C1+3.500_aac85cd.jpg\" \"s3_action_C1+4.300_aac85cd.jpg\" \"perkcards_crop_loop1_a1.jpg\" \"endless_crop_E+0.250_57bcac5.jpg\""
+}
+```
+
+**Mon 16 Nov 07:54:58 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:55:00 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 767,
+ "y": 462
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:55:02 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:55:06 · Agent (claude-opus-5-5)
+
+Screenshots are uploading. Waiting for them, then the cover.
+
+**Mon 16 Nov 07:55:06 · Tool call: mcp__cua-computer-use__scroll**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 1100,
+ "y": 400,
+ "direction": "up",
+ "amount": 10
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:55:07 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:55:11 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 831,
+ "y": 283
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:55:14 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:55:16 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 420,
+ "y": 442
+}
+```
+
+**Mon 16 Nov 07:55:17 · Tool call: mcp__cua-computer-use__type_text**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "text": "[notes]\\unreal\\megajam-2026\\lanes\\itch1\\cover\\cover_v8_white_630x500.png"
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:55:17 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:55:19 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 767,
+ "y": 462
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:55:21 · Agent (claude-opus-5-5)
+
+Cover sent. Checking that it and all five screenshots landed.
+
+**Mon 16 Nov 07:55:22 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:55:23 · Tool call: mcp__cua-computer-use__scroll**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 1100,
+ "y": 400,
+ "direction": "down",
+ "amount": 5
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:55:25 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:55:30 · Agent (claude-opus-5-5)
+
+All five screenshots are in, but out of order: the clap shot landed 4th. Moving it to the top.
+
+**Mon 16 Nov 07:55:30 · Tool call: mcp__cua-computer-use__move_cursor**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 800,
+ "y": 550
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:55:31 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:55:33 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 876,
+ "y": 521
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:55:34 · Tool call: mcp__cua-computer-use__move_cursor**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 800,
+ "y": 450
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:55:35 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:55:38 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 876,
+ "y": 421
+}
+```
+
+**Mon 16 Nov 07:55:38 · Tool call: mcp__cua-computer-use__move_cursor**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 800,
+ "y": 350
+}
+```
+
+**Mon 16 Nov 07:55:39 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:55:42 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:55:44 · Tool call: mcp__cua-computer-use__click**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 876,
+ "y": 321
+}
+```
+
+**Mon 16 Nov 07:55:45 · Tool call: mcp__cua-computer-use__move_cursor**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 1100,
+ "y": 450
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:55:46 · Agent (claude-opus-5-5)
+
+Reordering screenshots so the clap shot is first. Checking the result.
+
+**Mon 16 Nov 07:55:47 · Tool call: mcp__cua-computer-use__scroll**
+
+```
+{
+ "session": "itch1",
+ "scope": "desktop",
+ "x": 1100,
+ "y": 400,
+ "direction": "up",
+ "amount": 3
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+**Mon 16 Nov 07:55:49 · Tool call: mcp__cua-computer-use__get_desktop_state**
+
+```
+{
+ "session": "itch1",
+ "max_image_dimension": 1280
+}
+```
+
+Result: [withheld: the call read this PC's screen]
+
+### Mon 16 Nov 07:55:52 · Agent (claude-opus-5-5)
+
+Every field is filled. Before I hand back, I'll log this.
+
+**Mon 16 Nov 07:55:52 · Tool call: Bash** (Get time, read end of log and handoff's not-done list)
+
+```
+date '+%H:%M %Z'; cd "[notes]/unreal/megajam-2026/lanes/itch1" && tail -20 LOG.md && grep -n "Not done" -A 25 HANDOFF.md | head -50
+```
+
+Result:
+
+```
+07:55 MPST
+**04:29.** Owner: delete the three parked stand-ins at the bottom. Removed the 'Parked here' block (light2 freeze, hud3 stage, loop1 cards; the source files in those lanes are untouched), the review bar's 'old 960 px stand-in' sentence, and the .shots CSS nothing uses now.
+**04:30.** Owner: page ready; only the dotted items wait on the main thread. Cleared the tags and AI Disclosure checks (owner ok'd both earlier). Credits checked against SUBMISSION.md's sourced list: every in-build row is covered (Quaternius UAL, Mixamo, Stein Games pistol and rifle, LonesomeDucky scope, VSCO 2, ambientCG and Poly Haven textures and models, Store Page hands CC BY 4.0, 22 Megascans, the CC0 sound sources bigsoundbank, opengameart, Kenney, happysoulmusic, DLSS, Exo 2, Saira); the toy revolver is not in the build. Left: zip size, the three agent and token numbers, the dev log link (owner), and a credits re-check if the last build adds a row.
+**04:30.** Asked the main thread for the last zip's bytes, the end recount (125 / 124 / 6.2 billion, and whether Codex is counted) and any new sourced row. HANDOFF.md written.
+**04:32.** Owner rewrote the Download line; in word for word: 'Windows 10 / 11, 64-bit. Unzip and run Supercut.exe in the SUPERCUT folder, No install or internet connection needed to play.'
+**04:32.** Owner: 'folder, no install' (lowercase n).
+**04:32.** Owner: 'to play' dropped from the Download line.
+**04:33.** Owner: Download line in bold.
+**04:34.** Owner: is procedural generation mentioned? Only in the tags. GAME.md: a Python generator builds and checks runs offline, the build ships a pool (12 on 15 Nov 17:22, a later '50-run' mention), so generated but not at play time. Draft line for The set: 'Every run is a different shoot: the sets are procedurally generated, so no two takes play out the same.' [taste: owner review]; not in the mock until the main thread confirms how runs are made and picked, and the pool size (asked).
+**04:40.** Owner: Rewrites & Last Rites as three bullets like Cut » Action: perks, procedural generation, Endless Mode. Main thread (from 57bcac5's code): 12 baked runs of 12 rooms from our Python generator, picked per launch by the clock, same run on a retake; it is now adding a re-pick. Bullet 2 'Our procedural level generator built 12 shoots of 12 scenes, and each run puts you on one at random.' carries a check until the re-pick's behaviour is known. Bullets 1 and 3 keep the owner's words with a bold lead ('Pick a perk.', 'End
+[... 7076 more characters not shown]
+```
+
+**Mon 16 Nov 07:56:03 · Tool call: Bash** (Log the draft fill and note it in the handoff)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/itch1" && cat >> LOG.md <<'EOF'
+**07:48.** Owner: drive the signed-in browser and fill the itch draft. The project became a draft (edit page itch.io/game/edit/5376537) when the zip upload started. Filled: title SUPERCUT, tagline 'Cut. Shoot. Action.', video link, release status, No payments, the zip. New file stills/cut_action_row3.jpg (1944x360: the three aac85cd stills at 640x360 with 12 px gaps), because itch stacks description images one per line. itch_description.html is the description as pasted, with the itch-hosted image URLs; it leaves out the dev log paragraph, the credits-check line and the review bar. A misplaced click typed 'sho' and a blank line into the Download paragraph; fixed by pasting the clean source back in HTML mode (owner's bold on '[studio] Studios' and 'SUPERCUT' kept).
+**07:55.** Draft fill finished, not saved. Genre Shooter. Tags (10): fps, first-person, roguelike, singleplayer, time-manipulation, unreal-engine, movie, procedural-generation, short, arcade. AI disclosure Yes: Graphics, Sounds, Code (Text & Dialog left unticked, owner's call). AI statement (public): 'Built with AI agents. The code was written by Claude agents. GPT Images 2.6 made the reference pictures for the props and drew the perk and HUD icons, and Hyper3D Rodin turned the references into 3D props. 9 of the 61 sound effects were synthesized in Python by agents, and agents produced the soundtrack in REAPER. Sourced assets are listed under Credits.' [taste: owner review] Install instructions: the Download line. Zip shows Success, 638 MB, marked Windows; the red 'verify your email' box above it is left from the first try. Cover cover_v8_white_630x500.png. Screenshots in order: s1 clap, s2 hang, s3 action, perk cards, Endless Mode. Community Comments (default), visibility Draft. Save & view page not pressed: the owner presses it.
+EOF
+python - <<'EOF'
+from pathlib import Path
+p = Path("HANDOFF.md")
+s = p.read_text(encoding="utf-8")
+old = "## Moving it onto itch\n"
+new = """## Moving it onto itch
+
+Draft filled at 07:55 (not saved; the owner presses Save & view page): every field on the edit page, the zip
+(Windows), the cover, five screenshots and the description from `itch_description.html`. Details in LOG.md 07:48
+and 07:55. Still to do on itch: the theme (Edit theme, after the first save), the dev log link, and Submit to the jam.
+"""
+assert s.count(old) == 1
+p.write_text(s.replace(old, new), encoding="utf-8")
+EOF
+grep -n "Draft filled" HANDOFF.md
+```
+
+Result:
+
+```
+43:Draft filled at 07:55 (not saved; the owner presses Save & view page): every field on the edit page, the zip
+```
+
+**Mon 16 Nov 07:56:08 · Tool call: Bash** (Add the two new files to the handoff table)
+
+```
+cd "[notes]/unreal/megajam-2026/lanes/itch1" && python - <<'EOF'
+from pathlib import Path
+p = Path("HANDOFF.md")
+lines = p.read_text(encoding="utf-8").split("\n")
+i = next(n for n, l in enumerate(lines) if l.startswith("| `stills/perks_endless_pair.jpg`"))
+lines[i+1:i+1] = [
+ "| `stills/cut_action_row3.jpg` | The three Cut » Action stills in one row for itch (description images stack), 1944x360. |",
+ "| `itch_description.html` | The itch description as pasted into the draft, with the itch-hosted image URLs. |",
+]
+p.write_text("\n".join(lines), encoding="utf-8")
+EOF
+sed -n 15,22p HANDOFF.md
+```
+
+Result:
+
+```
+| `art/logo_supercut.svg`, `art/logo_supercut_2000.png` | The logo in the board's ink (#403514). White version for the game: `art/logo_supercut_ffffff.svg`, `_4096.png`. |
+| `gif/supercut_freeze_560_aac85cd.gif` | The page GIF, 560 px, 2.85 MB (under itch's ~3 MB). |
+| `stills/s1_clap_C1+0.200_aac85cd.jpg`, `s2_hang_C1+3.500_aac85cd.jpg`, `s3_action_C1+4.300_aac85cd.jpg` | The three Cut » Action stills, 960x540. |
+| `stills/perks_endless_pair.jpg` | Perk cards and the ENDLESS MODE banner side by side, one image (itch has no columns), 1292x360. Its halves: `perkcards_crop_loop1_a1.jpg`, `endless_crop_E+0.250_57bcac5.jpg`. |
+| `stills/cut_action_row3.jpg` | The three Cut » Action stills in one row for itch (description images stack), 1944x360. |
+| `itch_description.html` | The itch description as pasted into the draft, with the itch-hosted image URLs. |
+| `LOG.md` | Every change and owner decision, with times. |
+| `tools/` | Scripts that rebuild the art (below). |
+```
+
+### Mon 16 Nov 07:56:17 · Agent (claude-opus-5-5)
+
+The SUPERCUT draft is filled in. I haven't pressed **Save & view page**. It's at the bottom of the form, with visibility still on **Draft**. You can press it, or tell me to.
+
+**Filled:**
+- **Description:** I pasted the clean version back in. The stray "sho" and the empty line are gone, and your bold on [studio] Studios and SUPERCUT is still there.
+- **Genre:** Shooter.
+- **Tags (10):** fps, first-person, roguelike, singleplayer, time-manipulation, unreal-engine, movie, procedural-generation, short, arcade.
+- **AI disclosure:** Yes, with Graphics, Sounds and Code ticked. I added a short AI usage statement, which shows publicly on the page. It's based on your "How it was made" section, so check the wording. `[taste: owner review]`
+- **Install instructions:** your Download line.
+- **Upload:** the zip now shows "Success, 638mb", and I ticked Windows as its platform. The red "verify your email" box above it is left over from the first try and should go away when the page reloads.
+- **Cover:** `cover_v8_white_630x500.png`.
+- **Screenshots, in this order:** clap, bullets hanging, ACTION, perk cards, Endless Mode.
+
+**Your call:**
+- **Text & Dialog** under the AI types is unticked. Tick it if you count the in-game text and page copy as AI-written.
+- **Release status** says "In development". Switch it to "Released" if you'd rather a jam entry show as finished.
+
+**Left after saving:**
+- Set the theme in Edit theme: fonts, colours and the moving background, all listed in `THEME.md`. Then check the background GIF actually animates on the draft.
+- Add the dev log link, once you've decided on it.
+- You press Submit to the jam yourself.
+
+I've added the fill to `LOG.md` and `HANDOFF.md`.
+
+Skills used: studio-tools
